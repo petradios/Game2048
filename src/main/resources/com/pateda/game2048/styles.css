@@ -1,0 +1,144 @@
+/* * 2048 Game Styling
+ * Provides background and text colors for each tile value.
+ */
+
+/* --- Base Styles --- */
+.root {
+    -fx-background-color: #faf8ef; /* Light overall background */
+    -fx-font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- Main Menu Styles --- */
+
+.main-menu-root {
+    -fx-background-color: #faf8ef;
+}
+
+.game-title {
+    -fx-font-size: 80px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #776e65; /* Dark grey-brown text */
+}
+
+/* Standard Menu Button */
+.menu-button {
+    -fx-background-color: #8f7a66; /* Brown button background */
+    -fx-text-fill: #f9f6f2; /* White text */
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 12px 20px;
+    -fx-min-width: 220px;
+    -fx-cursor: hand;
+}
+
+.menu-button:hover {
+    -fx-background-color: #9f8b77; /* Slightly lighter on hover */
+}
+
+.menu-button:pressed {
+    -fx-background-color: #7f6a56; /* Darker on press */
+}
+
+.menu-button:disabled {
+    -fx-opacity: 0.5;
+    -fx-background-color: #bbada0;
+}
+
+/* Small Button (for Main Menu actions like Quit) */
+.menu-button-small {
+    -fx-background-color: #8f7a66;
+    -fx-text-fill: #f9f6f2;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+    -fx-min-width: 180px;
+    -fx-cursor: hand;
+}
+.menu-button-small:hover { -fx-background-color: #9f8b77; }
+.menu-button-small:pressed { -fx-background-color: #7f6a56; }
+
+/* NEW: Compact Button (for Undo) */
+.menu-button-compact {
+    -fx-background-color: #8f7a66;
+    -fx-text-fill: #f9f6f2;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-padding: 8px 15px;
+    -fx-min-width: 80px; /* Much smaller width */
+    -fx-min-height: 50px; /* Match height of back button */
+    -fx-cursor: hand;
+}
+.menu-button-compact:hover { -fx-background-color: #9f8b77; }
+.menu-button-compact:pressed { -fx-background-color: #7f6a56; }
+.menu-button-compact:disabled { -fx-opacity: 0.5; -fx-background-color: #bbada0; }
+
+/* Icon Button (Back Button) */
+.menu-button-icon {
+    -fx-background-color: #8f7a66;
+    -fx-text-fill: #f9f6f2;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-min-width: 50px;
+    -fx-max-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+    -fx-background-radius: 10px 0 10px 10px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+.menu-button-icon:hover { -fx-background-color: #9f8b77; }
+
+
+/* --- Game Board Styles --- */
+
+.game-grid {
+    -fx-background-color: #bbada0;
+    -fx-padding: 10px;
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+    -fx-border-radius: 6px;
+}
+
+.tile {
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-background-radius: 3px;
+}
+
+/* --- Tile Value Styles (Redacted for brevity) --- */
+.tile-empty { -fx-background-color: #cdc1b4; -fx-text-fill: transparent; }
+.tile-2     { -fx-background-color: #eee4da; -fx-text-fill: #776e65; -fx-font-size: 40pt; }
+.tile-4     { -fx-background-color: #ede0c8; -fx-text-fill: #776e65; -fx-font-size: 40pt; }
+.tile-8     { -fx-background-color: #f2b179; -fx-text-fill: #f9f6f2; -fx-font-size: 40pt; }
+.tile-16    { -fx-background-color: #f59563; -fx-text-fill: #f9f6f2; -fx-font-size: 36pt; }
+.tile-32    { -fx-background-color: #f67c5f; -fx-text-fill: #f9f6f2; -fx-font-size: 36pt; }
+.tile-64    { -fx-background-color: #f65e3b; -fx-text-fill: #f9f6f2; -fx-font-size: 36pt; }
+.tile-128   { -fx-background-color: #edcf72; -fx-text-fill: #f9f6f2; -fx-font-size: 32pt; }
+.tile-256   { -fx-background-color: #edcc61; -fx-text-fill: #f9f6f2; -fx-font-size: 32pt; }
+.tile-512   { -fx-background-color: #edc850; -fx-text-fill: #f9f6f2; -fx-font-size: 32pt; }
+.tile-1024  { -fx-background-color: #edc53f; -fx-text-fill: #f9f6f2; -fx-font-size: 26pt; }
+.tile-2048  { -fx-background-color: #edc22e; -fx-text-fill: #f9f6f2; -fx-font-size: 26pt; }
+.tile-max   { -fx-background-color: #3c3a32; -fx-text-fill: #f9f6f2; -fx-font-size: 22pt; }
+
+/* --- HUD Styles --- */
+
+.score-label-game {
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #776e65;
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.game-over-message {
+    -fx-font-size: 48pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #776e65;
+    -fx-background-color: rgba(238, 228, 218, 0.73);
+    -fx-alignment: center;
+    -fx-background-radius: 6px;
+}

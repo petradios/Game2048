@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.layout.VBox?>
+<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
+    <children>
+        <!-- Back Button -->
+        <Button fx:id="backButton" mnemonicParsing="false" onAction="#onBackButtonClick" text="←" styleClass="menu-button-icon" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </Button>
+
+        <!-- NEW: Undo Button -->
+        <!-- Placed to the right of the Back button -->
+        <Button fx:id="undoButton" mnemonicParsing="false" onAction="#onUndoButtonClick" text="Undo" styleClass="menu-button-compact" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="40.0" />
+
+        <!-- Score Display -->
+        <!-- Adjusted width to 500 to avoid overlapping with the buttons on the left -->
+        <Label fx:id="scoreLabel" alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="500.0" styleClass="score-label-game" text="SCORE: 0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+
+        <!-- Game Board (GridPane) -->
+        <GridPane fx:id="gameGrid" alignment="CENTER" prefHeight="450.0" prefWidth="450.0" styleClass="game-grid" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="175.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <!-- Tiles (Labels) -->
+                <Label fx:id="tile00" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" />
+                <Label fx:id="tile10" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                <Label fx:id="tile20" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" />
+                <Label fx:id="tile30" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="3" />
+                <Label fx:id="tile01" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1" />
+                <Label fx:id="tile11" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="tile21" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Label fx:id="tile31" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                <Label fx:id="tile02" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
+                <Label fx:id="tile12" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="tile22" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                <Label fx:id="tile32" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <Label fx:id="tile03" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="3" />
+                <Label fx:id="tile13" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label fx:id="tile23" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <Label fx:id="tile33" alignment="CENTER" prefHeight="100.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            </children>
+        </GridPane>
+        <!-- Inside the main AnchorPane, layered above gameGrid -->
+        <VBox fx:id="winMessageOverlay" alignment="CENTER" prefHeight="450.0" prefWidth="450.0"
+              style="-fx-background-color: rgba(238, 228, 218, 0.95); -fx-background-radius: 6px;"
+              visible="false" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="175.0">
+            <children>
+                <Label styleClass="game-title" text="2048!" style="-fx-font-size: 60px; -fx-text-fill: #edc22e;" />
+                <Label text="You beat the game! Keep playing?" style="-fx-font-size: 20px; -fx-text-fill: #776e65;">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                </Label>
+                <Button mnemonicParsing="false" onAction="#onContinuePlaying" text="Continue Playing" styleClass="menu-button">
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#onBackButtonClick" text="Go to Main Menu" styleClass="menu-button-small" />
+            </children>
+        </VBox>
+        <!-- Game Over Message (Overlay) -->
+        <Label fx:id="gameOverMessage" alignment="CENTER" layoutX="175.0" layoutY="175.0" prefHeight="450.0" prefWidth="450.0" styleClass="game-over-message" text="Game Over!" visible="false" AnchorPane.bottomAnchor="175.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="175.0">
+            <font>
+                <Font size="10.0" />
+            </font>
+        </Label>
+        <!-- Replay Button (Appears on Game Over) -->
+        <Button fx:id="replayButton" mnemonicParsing="false" onAction="#onReplayButtonClick" text="Replay" styleClass="menu-button" visible="false" AnchorPane.leftAnchor="325.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="640.0" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,129 @@
+/* * 2048 Retro Dark Theme
+ * Uses a dark, nostalgic color palette (deep blues, cyan, magenta).
+ */
+
+/* --- Base Styles --- */
+.root {
+    -fx-background-color: #111d2c; /* Very Dark Blue/Navy Root BG */
+    -fx-font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --- Main Menu Styles --- */
+
+.main-menu-root {
+    -fx-background-color: #111d2c;
+}
+
+.game-title {
+    -fx-font-size: 80px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00f7e4; /* Neon Cyan Text */
+}
+
+/* Button Base Styles */
+.menu-button, .menu-button-small, .menu-button-compact {
+    -fx-background-color: #3d5a80; /* Muted Retro Blue Button */
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.menu-button {
+    -fx-font-size: 22px;
+    -fx-padding: 12px 20px;
+    -fx-min-width: 220px;
+}
+
+.menu-button-small {
+    -fx-font-size: 18px;
+    -fx-padding: 8px 15px;
+    -fx-min-width: 180px;
+}
+
+/* NEW: Compact Undo Button */
+.menu-button-compact {
+    -fx-font-size: 18px;
+    -fx-padding: 8px 15px;
+    -fx-min-width: 80px;
+    -fx-min-height: 50px;
+}
+
+.menu-button:hover, .menu-button-small:hover, .menu-button-compact:hover {
+    -fx-background-color: #4b6b97; /* Lighter on hover */
+}
+.menu-button:pressed, .menu-button-small:pressed, .menu-button-compact:pressed {
+    -fx-background-color: #2e4769; /* Darker on press */
+}
+.menu-button-compact:disabled {
+    -fx-opacity: 0.5;
+    -fx-background-color: #2e4769;
+}
+
+
+/* --- Icon Button Style (for Back Button) --- */
+.menu-button-icon {
+    -fx-background-color: #3d5a80;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-min-width: 50px;
+    -fx-max-width: 50px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+    -fx-background-radius: 10px 0 10px 10px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+/* --- Game Board Styles --- */
+
+.game-grid {
+    -fx-background-color: #283c4f; /* Dark Teal/Blue Board BG */
+    -fx-padding: 10px;
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+    -fx-border-radius: 6px;
+}
+
+.tile {
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-background-radius: 3px;
+}
+
+/* --- Tile Value Styles (Retro Color Progression) --- */
+.tile-empty { -fx-background-color: #384e66; -fx-text-fill: transparent; }
+.tile-2     { -fx-background-color: #4c7f78; -fx-text-fill: #ffffff; -fx-font-size: 40pt; }
+.tile-4     { -fx-background-color: #4b6b97; -fx-text-fill: #ffffff; -fx-font-size: 40pt; }
+.tile-8     { -fx-background-color: #7b4b97; -fx-text-fill: #ffffff; -fx-font-size: 40pt; }
+.tile-16    { -fx-background-color: #974b6a; -fx-text-fill: #ffffff; -fx-font-size: 36pt; }
+.tile-32    { -fx-background-color: #cc297c; -fx-text-fill: #2c3e50; -fx-font-size: 36pt; }
+.tile-64    { -fx-background-color: #ff5500; -fx-text-fill: #2c3e50; -fx-font-size: 36pt; }
+.tile-128   { -fx-background-color: #ffaa00; -fx-text-fill: #2c3e50; -fx-font-size: 32pt; }
+.tile-256   { -fx-background-color: #55ff55; -fx-text-fill: #2c3e50; -fx-font-size: 32pt; }
+.tile-512   { -fx-background-color: #00f7e4; -fx-text-fill: #2c3e50; -fx-font-size: 32pt; }
+.tile-1024  { -fx-background-color: #ff00ff; -fx-text-fill: #2c3e50; -fx-font-size: 26pt; }
+.tile-2048  { -fx-background-color: #ffffff; -fx-text-fill: #2c3e50; -fx-font-size: 26pt; }
+.tile-max   { -fx-background-color: #00f7e4; -fx-text-fill: #2c3e50; -fx-font-size: 22pt; }
+
+
+/* --- HUD Styles --- */
+
+.score-label-game {
+    -fx-font-size: 24pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00f7e4; /* Neon text */
+    -fx-alignment: CENTER_RIGHT;
+}
+
+.game-over-message {
+    -fx-font-size: 48pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #00f7e4;
+    -fx-background-color: rgba(17, 29, 44, 0.73); /* Semi-transparent dark blue overlay */
+    -fx-alignment: center;
+    -fx-background-radius: 6px;
+}
