@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" spacing="10.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
+<VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" spacing="10.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
     <children>
         <Label styleClass="game-title" text="2048">
             <VBox.margin>
-                <Insets bottom="50.0" top="100.0" />
+                <Insets bottom="20.0" top="50.0" />
             </VBox.margin>
         </Label>
 
@@ -35,36 +35,25 @@
             <children>
 
                 <Button fx:id="quitIcon" mnemonicParsing="false" onAction="#onQuitButtonClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <graphic>
-                        <javafx.scene.layout.Region styleClass="svg-icon, icon-quit" />
-                    </graphic>
+                    <graphic><javafx.scene.layout.Region styleClass="svg-icon, icon-quit" /></graphic>
                 </Button>
                 <Button fx:id="infoIcon" mnemonicParsing="false" onAction="#onInfoClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.columnIndex="3">
-                    <graphic>
-                        <javafx.scene.layout.Region styleClass="svg-icon, icon-info" />
-                    </graphic>
-                </Button>
-                <Button fx:id="newGameIcon" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                    <graphic>
-                        <javafx.scene.layout.Region styleClass="svg-icon, icon-restart" />
-                    </graphic>
+                    <graphic><javafx.scene.layout.Region styleClass="svg-icon, icon-info" /></graphic>
                 </Button>
 
-                <Button fx:id="themeToggleIcon" mnemonicParsing="false" onAction="#onThemeToggle" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.rowIndex="3">
-                    <graphic>
-                        <javafx.scene.layout.Region fx:id="themeRegion" styleClass="svg-icon, icon-sun" />
-                    </graphic>
+                <Button fx:id="newGameIcon" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                    <graphic><javafx.scene.layout.Region styleClass="svg-icon, icon-restart" /></graphic>
+                </Button>
+                <Button fx:id="scoreIcon" mnemonicParsing="false" onAction="#onScoreClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.rowIndex="1">
+                    <graphic><javafx.scene.layout.Region styleClass="svg-icon, icon-score" /></graphic>
                 </Button>
 
                 <Button fx:id="playButton" alignment="CENTER" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="200.0" prefWidth="200.0" styleClass="play-button-grid" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
-                    <graphic>
-                        <javafx.scene.layout.Region styleClass="svg-icon, icon-play" />
-                    </graphic>
+                    <graphic><javafx.scene.layout.Region styleClass="svg-icon, icon-play" /></graphic>
                 </Button>
-                <Button fx:id="scoreIcon" mnemonicParsing="false" onAction="#onScoreClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.rowIndex="1">
-                    <graphic>
-                        <javafx.scene.layout.Region styleClass="svg-icon, icon-score" />
-                    </graphic>
+
+                <Button fx:id="themeToggleIcon" mnemonicParsing="false" onAction="#onThemeToggle" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.rowIndex="3">
+                    <graphic><javafx.scene.layout.Region fx:id="themeRegion" styleClass="svg-icon, icon-sun" /></graphic>
                 </Button>
 
                 <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.columnIndex="1" />
