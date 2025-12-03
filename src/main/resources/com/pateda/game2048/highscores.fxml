@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" spacing="20.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" spacing="20.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
     <children>
         <!-- Title -->
         <Label styleClass="game-title" text="Best Scores">
             <VBox.margin>
-                <Insets top="80.0" bottom="20.0" />
+                <Insets bottom="20.0" top="80.0" />
             </VBox.margin>
         </Label>
 
@@ -22,9 +22,9 @@
                 <!-- Header Row -->
                 <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="highscore-header">
                     <children>
-                        <Label text="Rank" prefWidth="60.0" styleClass="highscore-label-header" />
-                        <Label text="Name" prefWidth="150.0" styleClass="highscore-label-header" /> <Label text="Date" prefWidth="130.0" styleClass="highscore-label-header" />
-                        <Label text="Score" alignment="CENTER_RIGHT" prefWidth="120.0" styleClass="highscore-label-header" />
+                        <Label prefWidth="60.0" styleClass="highscore-label-header" text="Rank" />
+                        <Label prefWidth="150.0" styleClass="highscore-label-header" text="Name" /> <Label prefWidth="130.0" styleClass="highscore-label-header" text="Date" />
+                        <Label alignment="CENTER_RIGHT" prefWidth="120.0" styleClass="highscore-label-header" text="Score" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
@@ -45,7 +45,7 @@
         </VBox>
 
         <!-- Back Button -->
-        <Button mnemonicParsing="false" onAction="#onBackToMenuClick" text="Back to Menu" styleClass="menu-button">
+        <Button mnemonicParsing="false" onAction="#onBackToMenuClick" styleClass="menu-button" text="Back to Menu">
             <VBox.margin>
                 <Insets top="30.0" />
             </VBox.margin>

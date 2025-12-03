@@ -8,18 +8,16 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Rectangle?>
 
 <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" spacing="10.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
     <children>
-        <!-- Game Title -->
         <Label styleClass="game-title" text="2048">
             <VBox.margin>
                 <Insets bottom="50.0" top="100.0" />
             </VBox.margin>
         </Label>
 
-        <!-- Icon Grid Container (4x4 Visual Representation) -->
         <GridPane alignment="CENTER" prefHeight="400.0" prefWidth="400.0" styleClass="menu-grid-container">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
@@ -36,7 +34,6 @@
 
             <children>
 
-                <!-- ROW 0: QUIT | GRID_SIZE | INFO | NEW_GAME -->
                 <Button fx:id="quitIcon" mnemonicParsing="false" onAction="#onQuitButtonClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <graphic>
                         <javafx.scene.layout.Region styleClass="svg-icon, icon-quit" />
@@ -48,18 +45,17 @@
                     </graphic>
                 </Button>
                 <Button fx:id="newGameIcon" mnemonicParsing="false" onAction="#onNewGameButtonClick" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font size="20.0" />
-               </font></Button>
+                    <graphic>
+                        <javafx.scene.layout.Region styleClass="svg-icon, icon-restart" />
+                    </graphic>
+                </Button>
 
-                <!-- ROW 1: THEME | PLAY BUTTON (2x2) | (Empty) -->
                 <Button fx:id="themeToggleIcon" mnemonicParsing="false" onAction="#onThemeToggle" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.rowIndex="3">
                     <graphic>
                         <javafx.scene.layout.Region fx:id="themeRegion" styleClass="svg-icon, icon-sun" />
                     </graphic>
                 </Button>
 
-                <!-- Play/Continue Button (2x2 Span) -->
                 <Button fx:id="playButton" alignment="CENTER" mnemonicParsing="false" onAction="#onPlayButtonClick" prefHeight="200.0" prefWidth="200.0" styleClass="play-button-grid" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                     <graphic>
                         <javafx.scene.layout.Region styleClass="svg-icon, icon-play" />
@@ -71,11 +67,16 @@
                     </graphic>
                 </Button>
 
+                <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.columnIndex="1" />
+                <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.columnIndex="2" />
+                <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Rectangle arcHeight="10.0" arcWidth="10.0" height="100.0" styleClass="menu-deco-tile" width="100.0" GridPane.rowIndex="2" />
+
             </children>
         </GridPane>
-
-        <!-- Note: We are dynamically setting the text of saveStatusIcon and continueIcon in SceneController -->
-
     </children>
     <padding>
         <Insets bottom="50.0" />

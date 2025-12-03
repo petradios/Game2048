@@ -48,7 +48,8 @@ public class SceneController implements Initializable {
             themeRegion.getStyleClass().remove("icon-sun");
             themeRegion.getStyleClass().remove("icon-moon");
 
-            if (Game2048.isGrayscale()) {
+            // Assuming standard isGrayscale check based on your Game2048 class
+            if (Game2048.isDarkTheme()) {
                 themeRegion.getStyleClass().add("icon-moon");
             } else {
                 themeRegion.getStyleClass().add("icon-sun");
@@ -76,14 +77,14 @@ public class SceneController implements Initializable {
     // OVERLAYS
     @FXML private VBox winMessageOverlay;
     @FXML private VBox highScoreOverlay;
-    @FXML private VBox gameOverOverlay; // NEW: The container for Game Over elements
+    @FXML private VBox gameOverOverlay;
 
-    // Elements inside overlays (kept for reference or if text needs changing)
+    // Elements inside overlays
     @FXML private Label gameOverMessage;
     @FXML private Button replayButton;
     @FXML private TextField nameInput;
 
-    // Inject all 16 individual tile Labels from the FXML (r,c order)
+    // Inject all 16 individual tile Labels
     @FXML private Label tile00, tile10, tile20, tile30;
     @FXML private Label tile01, tile11, tile21, tile31;
     @FXML private Label tile02, tile12, tile22, tile32;
@@ -93,7 +94,7 @@ public class SceneController implements Initializable {
     private GameController gameLogic;
     private Label[][] tileLabels;
     private Stage stage;
-    private int[][] oldBoardState; // Stores the board state BEFORE the last move
+    private int[][] oldBoardState;
     private static final int BOARD_SIZE = 4;
 
     // Animation-related
@@ -114,7 +115,7 @@ public class SceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (gameGrid != null) {
-            // ... (Game Scene logic remains the same) ...
+            // --- Game Scene Initialization ---
             tileLabels = new Label[][]{
                     {tile00, tile10, tile20, tile30}, {tile01, tile11, tile21, tile31},
                     {tile02, tile12, tile22, tile32}, {tile03, tile13, tile23, tile33}
@@ -130,15 +131,8 @@ public class SceneController implements Initializable {
         else if (playButton != null) {
             // --- Main Menu Initialization ---
             boolean saveExists = GameController.saveFileExists(GameController.getSaveFile());
-            boolean isSavePlayable = false;
 
-            if (saveExists) {
-                // Peek at the file to see if it's playable
-                GameController tempLoad = GameController.loadGame(GameController.getSaveFile());
-                if (tempLoad != null && !tempLoad.isGameOver()) {
-                    isSavePlayable = true;
-                }
-            }
+            // Note: Logic for changing icons based on save state can go here if needed
         }
     }
 
@@ -150,7 +144,12 @@ public class SceneController implements Initializable {
 
     // --- Menu Handlers ---
 
-    @FXML private void onInfoClick(ActionEvent event) { System.out.println("Info Clicked."); }
+    // INTEGRATED: Updated Info Click Handler
+    @FXML
+    private void onInfoClick(ActionEvent event) {
+        loadInfoScene();
+    }
+
     @FXML private void onSettingsClick(ActionEvent event) { System.out.println("Settings Clicked."); }
 
     @FXML
@@ -163,7 +162,26 @@ public class SceneController implements Initializable {
         loadMainMenuScene();
     }
 
-    // --- HIGH SCORE LOGIC ---
+    // --- SCENE LOADING LOGIC ---
+
+    // INTEGRATED: Load Info Scene Method
+    private void loadInfoScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/info.fxml"));
+            Parent root = loader.load();
+            SceneController controller = loader.getController();
+            controller.setStage(stage);
+
+            Scene scene = new Scene(root, 800, 800);
+            Game2048.applyTheme(scene);
+            stage.setScene(scene);
+            stage.setTitle("2048 - Information");
+
+        } catch (IOException e) {
+            System.err.println("Error loading info.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     private void loadHighScoresScene() {
         try {
@@ -184,6 +202,55 @@ public class SceneController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private void loadGameScene(GameController controllerInstance) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/game-scene.fxml"));
+            Parent gameRoot = loader.load();
+            SceneController gameController = loader.getController();
+
+            gameController.setStage(stage);
+            gameController.gameLogic = controllerInstance;
+            activeGameInstance = controllerInstance;
+
+            Scene gameScene = new Scene(gameRoot, 800, 800);
+            Game2048.applyTheme(gameScene);
+
+            gameController.oldBoardState = gameController.deepCopy(gameController.gameLogic.getBoard());
+            gameController.updateBoardUI();
+
+            stage.setScene(gameScene);
+            stage.setTitle("2048 Game");
+            gameController.requestGridFocus();
+
+        } catch (IOException e) {
+            System.err.println("Error loading game-scene.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void loadMainMenuScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/main-menu.fxml"));
+            Parent menuRoot = loader.load();
+            SceneController menuController = loader.getController();
+
+            menuController.setStage(stage);
+            activeGameInstance = null;
+
+            Scene menuScene = new Scene(menuRoot, 800, 800);
+            Game2048.applyTheme(menuScene);
+
+            stage.setScene(menuScene);
+            stage.setTitle("2048");
+
+        } catch (IOException e) {
+            System.err.println("Error loading main-menu.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // --- HIGH SCORE LOGIC ---
 
     public void populateHighScores() {
         if (highScoreList == null) return;
@@ -206,7 +273,6 @@ public class SceneController implements Initializable {
             rankLbl.setPrefWidth(60);
             rankLbl.getStyleClass().add("highscore-text");
 
-            // NEW: Name Column
             Label nameLbl = new Label(hs.getName());
             nameLbl.setPrefWidth(150);
             nameLbl.getStyleClass().add("highscore-text");
@@ -338,53 +404,6 @@ public class SceneController implements Initializable {
         loadGameScene(newGame);
     }
 
-    private void loadGameScene(GameController controllerInstance) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/game-scene.fxml"));
-            Parent gameRoot = loader.load();
-            SceneController gameController = loader.getController();
-
-            gameController.setStage(stage);
-            gameController.gameLogic = controllerInstance;
-            activeGameInstance = controllerInstance;
-
-            Scene gameScene = new Scene(gameRoot, 800, 800);
-            Game2048.applyTheme(gameScene);
-
-            gameController.oldBoardState = gameController.deepCopy(gameController.gameLogic.getBoard());
-            gameController.updateBoardUI();
-
-            stage.setScene(gameScene);
-            stage.setTitle("2048 Game");
-            gameController.requestGridFocus();
-
-        } catch (IOException e) {
-            System.err.println("Error loading game-scene.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    private void loadMainMenuScene() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/main-menu.fxml"));
-            Parent menuRoot = loader.load();
-            SceneController menuController = loader.getController();
-
-            menuController.setStage(stage);
-            activeGameInstance = null;
-
-            Scene menuScene = new Scene(menuRoot, 800, 800);
-            Game2048.applyTheme(menuScene);
-
-            stage.setScene(menuScene);
-            stage.setTitle("2048");
-
-        } catch (IOException e) {
-            System.err.println("Error loading main-menu.fxml: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     public void requestGridFocus() {
         if (gameGrid != null) {
             Platform.runLater(() -> gameGrid.requestFocus());
@@ -413,7 +432,6 @@ public class SceneController implements Initializable {
             if (gameLogic.isHighScore(gameLogic.getScore())) {
                 showHighScoreInput();
             } else {
-                // UPDATE: Show the Game Over VBox Overlay
                 if (gameOverOverlay != null) {
                     gameOverOverlay.setVisible(true);
                 }
@@ -505,7 +523,6 @@ public class SceneController implements Initializable {
             if (gameOverOverlay != null) gameOverOverlay.setVisible(false);
         } else if (gameLogic.isGameOver()) {
             if (!gameLogic.isHighScore(gameLogic.getScore())) {
-                // UPDATE: Show Overlay instead of just Label/Button
                 if (gameOverOverlay != null) gameOverOverlay.setVisible(true);
             }
         } else {

@@ -11,10 +11,10 @@ import java.io.IOException;
 public class Game2048 extends Application {
 
     private static final String DEFAULT_CSS = "/com/pateda/game2048/styles.css";
-    private static final String GRAYSCALE_CSS = "/com/pateda/game2048/grayscale.css";
+    private static final String GRAYSCALE_CSS = "/com/pateda/game2048/dark-styles.css";
 
     // Static state to track the current theme
-    private static boolean isGrayscale = false;
+    private static boolean isDarkTheme = false;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -50,7 +50,7 @@ public class Game2048 extends Application {
      * Toggles the grayscale state and updates the current scene's stylesheet.
      */
     public static void toggleTheme(Scene scene) {
-        isGrayscale = !isGrayscale;
+        isDarkTheme = !isDarkTheme;
         applyTheme(scene);
     }
 
@@ -61,15 +61,15 @@ public class Game2048 extends Application {
         if (scene == null) return;
 
         scene.getStylesheets().clear();
-        if (isGrayscale) {
+        if (isDarkTheme) {
             scene.getStylesheets().add(Game2048.class.getResource(GRAYSCALE_CSS).toExternalForm());
         } else {
             scene.getStylesheets().add(Game2048.class.getResource(DEFAULT_CSS).toExternalForm());
         }
     }
 
-    public static boolean isGrayscale() {
-        return isGrayscale;
+    public static boolean isDarkTheme() {
+        return isDarkTheme;
     }
 
     static void main(String[] args) {
