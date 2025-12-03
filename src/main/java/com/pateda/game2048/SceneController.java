@@ -1,5 +1,6 @@
 package com.pateda.game2048;
 
+import javafx.animation.Animation;
 import javafx.animation.ScaleTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -10,9 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -20,12 +23,14 @@ import com.pateda.game2048.GameController.Direction;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
  * Controller for the game board and scene flow. Handles UI input, display, and communicates
- * with the decoupled GameController for game logic. This controller manages both the
- * homepage and the game scene by checking which FXML initialized it.
+ * with the decoupled GameController for game logic.
  */
 public class SceneController implements Initializable {
 
@@ -35,14 +40,48 @@ public class SceneController implements Initializable {
     // --- FXML Injections for HOMEPAGE SCENE ---
     @FXML private Button continueButton;
     @FXML private Button themeToggle;
+    @FXML private VBox highScoreList;
+    @FXML private javafx.scene.layout.Region themeRegion;
+
+    private void updateThemeButtonText() {
+        if (themeRegion != null) {
+            themeRegion.getStyleClass().remove("icon-sun");
+            themeRegion.getStyleClass().remove("icon-moon");
+
+            if (Game2048.isGrayscale()) {
+                themeRegion.getStyleClass().add("icon-moon");
+            } else {
+                themeRegion.getStyleClass().add("icon-sun");
+            }
+        }
+    }
+
+    // MENU ICON BUTTONS
+    @FXML private Button quitIcon;
+    @FXML private Button infoIcon;
+    @FXML private Button newGameIcon;
+    @FXML private Button themeToggleIcon;
+    @FXML private Button playButton;
+    @FXML private Button saveStatusIcon;
+    @FXML private Button continueIcon;
+    @FXML private Button settingsIcon;
+    @FXML private Button scoreIcon;
+
 
     // --- FXML Injections for GAME SCENE ---
     @FXML private GridPane gameGrid;
     @FXML private Label scoreLabel;
+    @FXML private Button undoButton;
+
+    // OVERLAYS
+    @FXML private VBox winMessageOverlay;
+    @FXML private VBox highScoreOverlay;
+    @FXML private VBox gameOverOverlay; // NEW: The container for Game Over elements
+
+    // Elements inside overlays (kept for reference or if text needs changing)
     @FXML private Label gameOverMessage;
     @FXML private Button replayButton;
-    @FXML private Button undoButton;
-    @FXML private VBox winMessageOverlay;
+    @FXML private TextField nameInput;
 
     // Inject all 16 individual tile Labels from the FXML (r,c order)
     @FXML private Label tile00, tile10, tile20, tile30;
@@ -57,7 +96,8 @@ public class SceneController implements Initializable {
     private int[][] oldBoardState; // Stores the board state BEFORE the last move
     private static final int BOARD_SIZE = 4;
 
-    // NOTE: Animation tracking fields have been removed as they are no longer needed for scale transitions.
+    // Animation-related
+    private final Map<Label, Animation> pendingAnimations = new HashMap<>();
 
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -67,29 +107,38 @@ public class SceneController implements Initializable {
         return activeGameInstance;
     }
 
+    public GameController getGameLogic() {
+        return gameLogic;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (gameGrid != null) {
-            tileLabels = new Label[][] {
+            // ... (Game Scene logic remains the same) ...
+            tileLabels = new Label[][]{
                     {tile00, tile10, tile20, tile30}, {tile01, tile11, tile21, tile31},
                     {tile02, tile12, tile22, tile32}, {tile03, tile13, tile23, tile33}
             };
-
             gameGrid.setFocusTraversable(true);
             gameGrid.setOnKeyPressed(this::handleKeyPress);
             updateUndoButtonState();
-        } else if (continueButton != null) {
-            boolean saveExists = GameController.saveFileExists(GameController.getSaveFile());
-            continueButton.setDisable(!saveExists);
-            if (themeToggle != null) {
-                updateThemeButtonText();
+
+            if (nameInput != null) {
+                nameInput.setOnAction(this::onSubmitHighScore);
             }
         }
-    }
+        else if (playButton != null) {
+            // --- Main Menu Initialization ---
+            boolean saveExists = GameController.saveFileExists(GameController.getSaveFile());
+            boolean isSavePlayable = false;
 
-    private void updateThemeButtonText() {
-        if (themeToggle != null) {
-            themeToggle.setText(Game2048.isGrayscale() ? "Theme: Grayscale" : "Theme: Classic");
+            if (saveExists) {
+                // Peek at the file to see if it's playable
+                GameController tempLoad = GameController.loadGame(GameController.getSaveFile());
+                if (tempLoad != null && !tempLoad.isGameOver()) {
+                    isSavePlayable = true;
+                }
+            }
         }
     }
 
@@ -99,16 +148,151 @@ public class SceneController implements Initializable {
         }
     }
 
+    // --- Menu Handlers ---
+
+    @FXML private void onInfoClick(ActionEvent event) { System.out.println("Info Clicked."); }
+    @FXML private void onSettingsClick(ActionEvent event) { System.out.println("Settings Clicked."); }
+
+    @FXML
+    private void onScoreClick(ActionEvent event) {
+        loadHighScoresScene();
+    }
+
+    @FXML
+    private void onBackToMenuClick(ActionEvent event) {
+        loadMainMenuScene();
+    }
+
+    // --- HIGH SCORE LOGIC ---
+
+    private void loadHighScoresScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/highscores.fxml"));
+            Parent root = loader.load();
+            SceneController controller = loader.getController();
+            controller.setStage(stage);
+
+            // Populate the list
+            controller.populateHighScores();
+
+            Scene scene = new Scene(root, 800, 800);
+            Game2048.applyTheme(scene);
+            stage.setScene(scene);
+            stage.setTitle("2048 - High Scores");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void populateHighScores() {
+        if (highScoreList == null) return;
+
+        // Load game data to get scores
+        GameController data = GameController.loadGame(GameController.getSaveFile());
+        List<HighScore> scores = data.getHighScores();
+
+        highScoreList.getChildren().clear();
+
+        int rank = 1;
+        for (HighScore hs : scores) {
+            HBox row = new HBox();
+            row.getStyleClass().add("highscore-row");
+            row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+            row.setSpacing(20);
+            row.setPadding(new javafx.geometry.Insets(10, 20, 10, 20));
+
+            Label rankLbl = new Label("#" + rank++);
+            rankLbl.setPrefWidth(60);
+            rankLbl.getStyleClass().add("highscore-text");
+
+            // NEW: Name Column
+            Label nameLbl = new Label(hs.getName());
+            nameLbl.setPrefWidth(150);
+            nameLbl.getStyleClass().add("highscore-text");
+
+            Label dateLbl = new Label(hs.getDate());
+            dateLbl.setPrefWidth(130);
+            dateLbl.getStyleClass().add("highscore-text");
+
+            Label scoreLbl = new Label(String.valueOf(hs.getScore()));
+            scoreLbl.setPrefWidth(120);
+            scoreLbl.setAlignment(javafx.geometry.Pos.CENTER_RIGHT);
+            scoreLbl.getStyleClass().add("highscore-score");
+
+            row.getChildren().addAll(rankLbl, nameLbl, dateLbl, scoreLbl);
+            highScoreList.getChildren().add(row);
+        }
+    }
+
+    @FXML
+    private void onSubmitHighScore(ActionEvent event) {
+        String name = nameInput.getText();
+
+        // Save the score with the name
+        gameLogic.addHighScore(name, gameLogic.getScore());
+
+        // Save to file
+        gameLogic.saveGame(GameController.getSaveFile());
+
+        // Hide overlay
+        highScoreOverlay.setVisible(false);
+
+        // Navigate to the High Score screen to show the user their ranking
+        loadHighScoresScene();
+    }
+
+    private void showHighScoreInput() {
+        if (highScoreOverlay != null) {
+            highScoreOverlay.setVisible(true);
+            nameInput.setText("");
+            nameInput.requestFocus();
+        }
+    }
+
+    // --- Navigation Handlers ---
+
+    @FXML
+    private void onQuitButtonClick(ActionEvent event) {
+        if (gameLogic != null) {
+            gameLogic.saveGame(GameController.getSaveFile());
+        }
+        Platform.exit();
+    }
+
     @FXML
     private void onNewGameButtonClick(ActionEvent event) {
         GameController newGame = new GameController();
+
+        if (GameController.saveFileExists(GameController.getSaveFile())) {
+            GameController oldData = GameController.loadGame(GameController.getSaveFile());
+            if (oldData != null) {
+                newGame.setHighScores(oldData.getHighScores());
+            }
+        }
         loadGameScene(newGame);
     }
 
     @FXML
-    private void onContinueButtonClick(ActionEvent event) {
-        GameController loadedGame = GameController.loadGame(GameController.getSaveFile());
-        loadGameScene(loadedGame);
+    private void onPlayButtonClick(ActionEvent event) {
+        boolean saveExists = GameController.saveFileExists(GameController.getSaveFile());
+
+        if (saveExists) {
+            GameController loadedGame = GameController.loadGame(GameController.getSaveFile());
+
+            if (loadedGame.isGameOver()) {
+                System.out.println("Saved game was over. Starting fresh.");
+                GameController newGame = new GameController();
+                newGame.setHighScores(loadedGame.getHighScores());
+                loadGameScene(newGame);
+            } else {
+                System.out.println("Resuming active game.");
+                loadGameScene(loadedGame);
+            }
+        } else {
+            GameController newGame = new GameController();
+            loadGameScene(newGame);
+        }
     }
 
     @FXML
@@ -130,8 +314,8 @@ public class SceneController implements Initializable {
         if (gameLogic.undo()) {
             this.oldBoardState = deepCopy(gameLogic.getBoard());
             updateBoardUI();
-            requestGridFocus(); // <-- FIX: Return focus to the grid after undo
         }
+        requestGridFocus();
     }
 
     @FXML
@@ -143,11 +327,15 @@ public class SceneController implements Initializable {
 
     @FXML
     private void onReplayButtonClick(ActionEvent event) {
-        gameLogic = new GameController();
-        activeGameInstance = gameLogic;
-        this.oldBoardState = deepCopy(gameLogic.getBoard());
-        updateBoardUI();
-        requestGridFocus();
+        GameController newGame = new GameController();
+
+        if (GameController.saveFileExists(GameController.getSaveFile())) {
+            GameController oldData = GameController.loadGame(GameController.getSaveFile());
+            if (oldData != null) {
+                newGame.setHighScores(oldData.getHighScores());
+            }
+        }
+        loadGameScene(newGame);
     }
 
     private void loadGameScene(GameController controllerInstance) {
@@ -197,11 +385,6 @@ public class SceneController implements Initializable {
         }
     }
 
-    @FXML
-    private void onQuitButtonClick(ActionEvent event) {
-        Platform.exit();
-    }
-
     public void requestGridFocus() {
         if (gameGrid != null) {
             Platform.runLater(() -> gameGrid.requestFocus());
@@ -216,7 +399,10 @@ public class SceneController implements Initializable {
             return;
         }
 
-        if (winMessageOverlay != null && winMessageOverlay.isVisible()) {
+        // Prevent input if any overlay is visible
+        if ((winMessageOverlay != null && winMessageOverlay.isVisible()) ||
+                (highScoreOverlay != null && highScoreOverlay.isVisible()) ||
+                (gameOverOverlay != null && gameOverOverlay.isVisible())) {
             event.consume();
             return;
         }
@@ -224,9 +410,19 @@ public class SceneController implements Initializable {
         Direction direction = null;
 
         if (gameLogic.isGameOver()) {
+            if (gameLogic.isHighScore(gameLogic.getScore())) {
+                showHighScoreInput();
+            } else {
+                // UPDATE: Show the Game Over VBox Overlay
+                if (gameOverOverlay != null) {
+                    gameOverOverlay.setVisible(true);
+                }
+                gameLogic.saveGame(GameController.getSaveFile());
+            }
             return;
         }
 
+        // --- Determine Direction and Perform Move ---
         if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.W) {
             direction = Direction.UP;
         } else if (event.getCode() == KeyCode.DOWN || event.getCode() == KeyCode.S) {
@@ -241,7 +437,6 @@ public class SceneController implements Initializable {
             boolean boardChanged = gameLogic.handleMove(direction);
 
             if (boardChanged) {
-                // If the board changed, update the UI and trigger scale animations
                 updateBoardUI();
             }
         }
@@ -249,8 +444,7 @@ public class SceneController implements Initializable {
     }
 
     /**
-     * Synchronizes the JavaFX UI (Labels) with the internal GameController state,
-     * adding animations for newly spawned tiles and merging tiles.
+     * Synchronizes the JavaFX UI (Labels) with the internal GameController state.
      */
     public void updateBoardUI() {
         int[][] currentBoard = gameLogic.getBoard();
@@ -261,90 +455,71 @@ public class SceneController implements Initializable {
                 int oldValue = oldBoardState[r][c];
                 Label currentLabel = tileLabels[r][c];
 
-                // Clear any previous translation/scale that might be lingering
-                currentLabel.setTranslateX(0);
-                currentLabel.setTranslateY(0);
-                currentLabel.setScaleX(1.0);
-                currentLabel.setScaleY(1.0);
-
-                // 1. Update style and text instantly
                 currentLabel.getStyleClass().clear();
                 currentLabel.getStyleClass().add("tile");
+
+                boolean needsSpawnAnimation = (value > 0 && oldValue == 0);
+                boolean needsPulseAnimation = (value > 0 && oldValue > 0 && value != oldValue);
 
                 if (value > 0) {
                     currentLabel.setText(String.valueOf(value));
                     String className = value >= 4096 ? "tile-max" : "tile-" + value;
                     currentLabel.getStyleClass().add(className);
-
-                    // A) Apply Spawn Animation (New tile from zero)
-                    if (oldValue == 0) {
-                        currentLabel.setScaleX(0.1);
-                        currentLabel.setScaleY(0.1);
-
-                        ScaleTransition st = new ScaleTransition(Duration.millis(150), currentLabel);
-                        st.setToX(1.0);
-                        st.setToY(1.0);
-                        st.play();
-                    }
-                    // B) Apply Pulse Animation (Merged tile: value changed from non-zero)
-                    else if (oldValue != value && oldValue != 0) {
-                        ScaleTransition st = new ScaleTransition(Duration.millis(100), currentLabel);
-                        st.setFromX(1.15); // Exaggerated pulse
-                        st.setFromY(1.15);
-                        st.setToX(1.0);
-                        st.setToY(1.0);
-                        st.play();
-                    }
-
                 } else {
                     currentLabel.setText("");
                     currentLabel.getStyleClass().add("tile-empty");
                 }
+
+                if (needsSpawnAnimation) {
+                    currentLabel.setScaleX(0.7);
+                    currentLabel.setScaleY(0.7);
+                    ScaleTransition st = new ScaleTransition(Duration.millis(150), currentLabel);
+                    st.setToX(1.0);
+                    st.setToY(1.0);
+                    st.play();
+                } else if (needsPulseAnimation) {
+                    ScaleTransition st = new ScaleTransition(Duration.millis(100), currentLabel);
+                    st.setFromX(1.1);
+                    st.setFromY(1.1);
+                    st.setToX(1.0);
+                    st.setToY(1.0);
+                    st.play();
+                }
+
+                if (!needsSpawnAnimation && !needsPulseAnimation) {
+                    currentLabel.setScaleX(1.0);
+                    currentLabel.setScaleY(1.0);
+                }
             }
         }
 
-        // Update the previous board state for the next move comparison
         this.oldBoardState = deepCopy(currentBoard);
 
         scoreLabel.setText("SCORE: " + gameLogic.getScore());
         updateUndoButtonState();
 
-        // Check Win/Game Over state
-
         if (gameLogic.hasWon() && !gameLogic.isContinuePlaying()) {
             if (winMessageOverlay != null) {
                 winMessageOverlay.setVisible(true);
             }
-            gameOverMessage.setVisible(false);
-            if (replayButton != null) replayButton.setVisible(false);
-
+            if (gameOverOverlay != null) gameOverOverlay.setVisible(false);
         } else if (gameLogic.isGameOver()) {
-            gameOverMessage.setText("Game Over!");
-            gameOverMessage.setVisible(true);
-
-            if (replayButton != null) {
-                replayButton.setVisible(true);
+            if (!gameLogic.isHighScore(gameLogic.getScore())) {
+                // UPDATE: Show Overlay instead of just Label/Button
+                if (gameOverOverlay != null) gameOverOverlay.setVisible(true);
             }
         } else {
-            gameOverMessage.setVisible(false);
-            if (replayButton != null) replayButton.setVisible(false);
+            // Hide all overlays if game is active
+            if (gameOverOverlay != null) gameOverOverlay.setVisible(false);
             if (winMessageOverlay != null) winMessageOverlay.setVisible(false);
         }
     }
 
-    /** Deep copies the 2D board array. */
     private int[][] deepCopy(int[][] source) {
         int[][] destination = new int[BOARD_SIZE][BOARD_SIZE];
         for (int i = 0; i < BOARD_SIZE; i++) {
             System.arraycopy(source[i], 0, destination[i], 0, BOARD_SIZE);
         }
         return destination;
-    }
-
-    /**
-     * Public getter used by Game2048 to save state on app close.
-     */
-    public GameController getGameLogic() {
-        return gameLogic;
     }
 }

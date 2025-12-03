@@ -2,6 +2,7 @@ package com.pateda.game2048;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -22,7 +23,6 @@ public class GameController {
     private static final int HISTORY_LIMIT = 1; // Maximum number of past moves to store
     private static final int WINNING_TILE_VALUE = 2048; // The tile value required to "win"
 
-    // CRITICAL: Use a stable location in the user's home directory for persistence
     private static final String SAVE_FILE;
     static {
         SAVE_FILE = System.getProperty("user.home") + File.separator + "2048_save.json";
@@ -34,6 +34,7 @@ public class GameController {
     private boolean isGameOver;
     private boolean hasWon; // Tracks if the 2048 tile has been created
     private boolean continuePlaying; // Tracks if the user chose to keep playing after winning
+    private List<HighScore> highScores;
 
     @JsonIgnore
     private final Random random;
@@ -61,6 +62,7 @@ public class GameController {
         this.continuePlaying = false;
         this.boardHistory = new ArrayList<>();
         this.scoreHistory = new ArrayList<>();
+        this.highScores = new ArrayList<>(); // Initialize the list
 
         initializeBoard();
     }
@@ -130,6 +132,39 @@ public class GameController {
         }
         spawnNewTile();
         spawnNewTile();
+    }
+    // --- High Score Logic ---
+    // UPDATED: Now accepts a name
+    public void addHighScore(String name, long score) {
+        highScores.add(new HighScore(name, score));
+        Collections.sort(highScores);
+
+        // Keep only top 10 scores
+        if (highScores.size() > 10) {
+            highScores = highScores.subList(0, 10);
+        }
+    }
+    public boolean isHighScore(long currentScore) {
+        if (highScores.size() < 10) {
+            return true; // List isn't full, so it's a high score
+        }
+        // Check if current score beats the lowest score on the list
+        long lowestScore = highScores.get(highScores.size() - 1).getScore();
+        return currentScore > lowestScore;
+    }
+
+
+
+    public List<HighScore> getHighScores() {
+        if (highScores == null) {
+            highScores = new ArrayList<>();
+        }
+        return highScores;
+    }
+
+    // Setter for Jackson
+    public void setHighScores(List<HighScore> highScores) {
+        this.highScores = highScores;
     }
 
     /**
