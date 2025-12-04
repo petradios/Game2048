@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,11 +23,15 @@ public class Game2048 extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/main-menu.fxml"));
         Parent root = loader.load();
 
+
+
         SceneController sceneController = loader.getController();
         sceneController.setStage(stage);
 
-        Scene scene = new Scene(root, 800, 800);
+        Image iconImage = new Image(getClass().getResourceAsStream("/com/pateda/game2048/logo.png"));
+        stage.getIcons().add(iconImage);
 
+        Scene scene = new Scene(root, 800, 800);
         // Load the current stylesheet based on the static state
         applyTheme(scene);
 

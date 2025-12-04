@@ -1,10 +1,10 @@
-/* * 2048 Synthwave Dark Theme
- * Palette: Deep Grays, Purples, and Pinks.
+/* * 2048 Synthwave Dark Theme (Flat)
+ * Palette: Deep Grays, Purples, and Pinks. No Glow/Shadows.
  */
 
 /* --- Base Styles --- */
 .root {
-    -fx-background-color: #1a1a1d; /* Deep Charcoal Gray (replaces Navy) */
+    -fx-background-color: #1a1a1d; /* Deep Charcoal Gray */
     -fx-font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -18,7 +18,6 @@
     -fx-font-size: 80px;
     -fx-font-weight: bold;
     -fx-text-fill: #d64d8f; /* Hot Pink Text */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 10, 0, 0, 5);
 }
 
 /* --- Menu Grid Styles --- */
@@ -29,18 +28,17 @@
     -fx-hgap: 8px;
     -fx-vgap: 8px;
     -fx-background-radius: 6px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 20, 0, 0, 10);
 }
 
 .menu-deco-tile {
-    -fx-fill: #3e3e42; /* Dark Gray for decorative squares */
+    -fx-fill: #3e3e42;
     -fx-stroke: transparent;
 }
 
 /* --- Generic Icon Button Grid --- */
 .icon-button-grid {
     -fx-background-color: #3e3e42;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: f9f6f2;
     -fx-font-size: 36px;
     -fx-font-weight: bold;
     -fx-background-radius: 4px;
@@ -60,9 +58,9 @@
     -fx-background-color: #4a2c5a; /* Matches Tile 8 */
 }
 #quitIcon:hover {
-    -fx-background-color: #5d3670; /* Slightly lighter */
+    -fx-background-color: #5d3670;
 }
-#quitIcon .svg-icon { -fx-background-color: #ffffff; }
+#quitIcon .svg-icon { -fx-background-color: f9f6f2; }
 
 /* Play Button (Hot Pink - Hero Color) */
 #playButton {
@@ -71,7 +69,7 @@
 #playButton:hover {
     -fx-background-color: #e36298;
 }
-#playButton .svg-icon { -fx-background-color: #ffffff; }
+#playButton .svg-icon { -fx-background-color: f9f6f2; }
 
 /* Info Button (Purple) */
 #infoIcon {
@@ -80,7 +78,7 @@
 #infoIcon:hover {
     -fx-background-color: #854483;
 }
-#infoIcon .svg-icon { -fx-background-color: #ffffff; }
+#infoIcon .svg-icon { -fx-background-color: f9f6f2; }
 
 /* High Score Button (Deep Pink) */
 #scoreIcon {
@@ -89,7 +87,7 @@
 #scoreIcon:hover {
     -fx-background-color: #b9458a;
 }
-#scoreIcon .svg-icon { -fx-background-color: #ffffff; }
+#scoreIcon .svg-icon { -fx-background-color: f9f6f2; }
 
 /* Theme Toggle Button (Slate Gray) */
 #themeToggleIcon {
@@ -98,32 +96,41 @@
 #themeToggleIcon:hover {
     -fx-background-color: #5e616e;
 }
-#themeToggleIcon .svg-icon { -fx-background-color: #ffffff; }
+#themeToggleIcon .svg-icon { -fx-background-color: f9f6f2; }
+/* New Game Button (Orchid/Light Purple) */
+#newGameIcon {
+    -fx-background-color: #854483; /* Matches Tile 64 */
+}
+#newGameIcon:hover {
+    -fx-background-color: #a0559e; /* Slightly lighter */
+}
+#newGameIcon .svg-icon {
+    -fx-background-color: f9f6f2;
+}
 
 /* Large 2x2 Play Button Base Style */
 .play-button-grid {
-    -fx-background-color: #d64d8f; /* Pink base if ID not used */
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #d64d8f;
+    -fx-text-fill: f9f6f2;
     -fx-font-size: 60px;
     -fx-font-weight: bold;
     -fx-background-radius: 5px;
     -fx-cursor: hand;
 
+    /* Exact sizing to fill 2x2 grid */
     -fx-min-width: 208px;
     -fx-min-height: 208px;
     -fx-max-width: 208px;
     -fx-max-height: 208px;
     -fx-pref-width: 208px;
     -fx-pref-height: 208px;
-
-    /* Ensure no extra internal spacing */
     -fx-padding: 0;
 }
 
 /* --- Standard Button Styling (Purple/Pink Gradient feel) --- */
 .menu-button, .menu-button-small, .menu-button-compact {
     -fx-background-color: #6b3f7f; /* Deep Purple */
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: f9f6f2;
     -fx-font-size: 18px;
     -fx-font-weight: bold;
     -fx-background-radius: 4px;
@@ -159,14 +166,14 @@
 /* --- Icon Button Style (Back/Undo) --- */
 .menu-button-icon {
     -fx-background-color: #3e3e42; /* Dark Gray */
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: f9f6f2;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-min-width: 50px;
     -fx-max-width: 50px;
     -fx-min-height: 50px;
     -fx-max-height: 50px;
-    -fx-background-radius: 10px 0 10px 10px;
+    -fx-background-radius: 10px;
     -fx-cursor: hand;
     -fx-alignment: center;
 }
@@ -178,11 +185,13 @@
 /* --- SVG ICON DEFINITIONS --- */
 
 .svg-icon {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #776e65;
     -fx-min-width: 40px;
     -fx-min-height: 40px;
     -fx-max-width: 40px;
     -fx-max-height: 40px;
+    -fx-scale-shape: true;
+    -fx-position-shape: true;
 }
 
 /* Hover effects */
@@ -200,7 +209,7 @@
 .icon-undo {    -fx-shape: "M24 192l144 0c9.7 0 18.5-5.8 22.2-14.8s1.7-19.3-5.2-26.2l-46.7-46.7c75.3-58.6 184.3-53.3 253.5 15.9 75 75 75 196.5 0 271.5s-196.5 75-271.5 0c-10.2-10.2-19-21.3-26.4-33-9.5-14.9-29.3-19.3-44.2-9.8s-19.3 29.3-9.8 44.2C49.7 408.7 61.4 423.5 75 437 175 537 337 537 437 437S537 175 437 75C342.8-19.3 193.3-24.7 92.7 58.8L41 7C34.1 .2 23.8-1.9 14.8 1.8S0 14.3 0 24L0 168c0 13.3 10.7 24 24 24z";}
 .icon-score {   -fx-shape: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z";}
 .icon-sun {    -fx-shape: "M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.79 1.41-1.41-1.79-1.79-1.41 1.41zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z";}
-.icon-back {    -fx-shape: "M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z";}
+.icon-back {    -fx-shape: "M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z";-fx-scale-x: 0.8;-fx-scale-y: 1;}
 .icon-info{     -fx-shape: "M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM224 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm-8 64l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24z";}
 
 /* --- Game Board Styles --- */
@@ -211,7 +220,6 @@
     -fx-hgap: 15px;
     -fx-vgap: 15px;
     -fx-border-radius: 6px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5);
 }
 
 .tile {
@@ -226,29 +234,28 @@
 .tile-empty { -fx-background-color: #3e3e42; -fx-text-fill: transparent; }
 
 /* Grays/Charcoals (Low Values) */
-.tile-2     { -fx-background-color: #4e515c; -fx-text-fill: #ffffff; -fx-font-size: 40pt; }
-.tile-4     { -fx-background-color: #43454f; -fx-text-fill: #ffffff; -fx-font-size: 40pt; }
+.tile-2     { -fx-background-color: #4e515c; -fx-text-fill: f9f6f2; -fx-font-size: 40pt; }
+.tile-4     { -fx-background-color: #43454f; -fx-text-fill: f9f6f2; -fx-font-size: 40pt; }
 
 /* Purples (Mid Values) */
-.tile-8     { -fx-background-color: #4a2c5a; -fx-text-fill: #ffffff; -fx-font-size: 40pt; } /* Deep Purple */
-.tile-16    { -fx-background-color: #5d3670; -fx-text-fill: #ffffff; -fx-font-size: 36pt; }
-.tile-32    { -fx-background-color: #6b3f7f; -fx-text-fill: #ffffff; -fx-font-size: 36pt; } /* Purple */
-.tile-64    { -fx-background-color: #854483; -fx-text-fill: #ffffff; -fx-font-size: 36pt; } /* Lighter Purple */
+.tile-8     { -fx-background-color: #4a2c5a; -fx-text-fill: f9f6f2; -fx-font-size: 40pt; } /* Deep Purple */
+.tile-16    { -fx-background-color: #5d3670; -fx-text-fill: f9f6f2; -fx-font-size: 36pt; }
+.tile-32    { -fx-background-color: #6b3f7f; -fx-text-fill: f9f6f2; -fx-font-size: 36pt; } /* Purple */
+.tile-64    { -fx-background-color: #854483; -fx-text-fill: f9f6f2; -fx-font-size: 36pt; } /* Lighter Purple */
 
 /* Pinks (High Values) */
-.tile-128   { -fx-background-color: #9e3d85; -fx-text-fill: #ffffff; -fx-font-size: 32pt; } /* Deep Pink */
-.tile-256   { -fx-background-color: #b9458a; -fx-text-fill: #ffffff; -fx-font-size: 32pt; }
-.tile-512   { -fx-background-color: #d64d8f; -fx-text-fill: #ffffff; -fx-font-size: 32pt; } /* Hot Pink */
-.tile-1024  { -fx-background-color: #e36298; -fx-text-fill: #ffffff; -fx-font-size: 26pt; }
+.tile-128   { -fx-background-color: #9e3d85; -fx-text-fill: f9f6f2; -fx-font-size: 32pt; } /* Deep Pink */
+.tile-256   { -fx-background-color: #b9458a; -fx-text-fill: f9f6f2; -fx-font-size: 32pt; }
+.tile-512   { -fx-background-color: #d64d8f; -fx-text-fill: f9f6f2; -fx-font-size: 32pt; } /* Hot Pink */
+.tile-1024  { -fx-background-color: #e36298; -fx-text-fill: f9f6f2; -fx-font-size: 26pt; }
 
 /* The Goal */
 .tile-2048  {
     -fx-background-color: #f278a1;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: f9f6f2;
     -fx-font-size: 26pt;
-    -fx-effect: dropshadow(three-pass-box, rgba(242, 120, 161, 0.8), 20, 0, 0, 0); /* Pink Glow */
 }
-.tile-max   { -fx-background-color: #d64d8f; -fx-text-fill: #ffffff; -fx-font-size: 22pt; }
+.tile-max   { -fx-background-color: #d64d8f; -fx-text-fill: f9f6f2; -fx-font-size: 22pt; }
 
 
 /* --- HUD Styles --- */
@@ -302,7 +309,7 @@
 }
 
 .highscore-text {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: f9f6f2;
     -fx-font-size: 18px;
 }
 
@@ -316,7 +323,7 @@
 
 .text-field {
     -fx-background-color: #3e3e42;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: f9f6f2;
     -fx-prompt-text-fill: #888888;
     -fx-background-radius: 4px;
     -fx-border-color: #505054;
@@ -330,7 +337,6 @@
 .text-field:focused {
     -fx-background-color: #505054;
     -fx-border-color: #d64d8f; /* Pink border on focus */
-    -fx-effect: dropshadow(three-pass-box, rgba(214, 77, 143, 0.3), 10, 0, 0, 0);
 }
 
 /* --- Info Page Styles (Dark) --- */
@@ -343,6 +349,46 @@
 
 .info-text {
     -fx-font-size: 20px;
-    -fx-text-fill: #ffffff; /* White text */
+    -fx-text-fill: f9f6f2; /* White text */
     -fx-font-weight: normal;
+}
+/* --- Custom Scrollbar Styling (Synthwave) --- */
+
+/* The Scrollbar Container */
+.highscore-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.highscore-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12px;
+}
+
+/* The Track (Background) */
+.highscore-scroll .scroll-bar:vertical .track {
+    -fx-background-color: #2b2b2e; /* Matches Grid Container */
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+}
+
+/* The Thumb (Draggable part) */
+.highscore-scroll .scroll-bar:vertical .thumb {
+    -fx-background-color: #d64d8f; /* Hot Pink */
+    -fx-background-radius: 6px;
+}
+
+.highscore-scroll .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #e36298; /* Lighter Pink on hover */
+}
+
+/* Hide the arrow buttons */
+.highscore-scroll .scroll-bar .increment-button,
+.highscore-scroll .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+.highscore-scroll .scroll-bar .increment-arrow,
+.highscore-scroll .scroll-bar .decrement-arrow {
+    -fx-padding: 0;
 }
