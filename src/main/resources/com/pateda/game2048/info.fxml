@@ -35,7 +35,7 @@
                                 </VBox>
 
                                 <VBox spacing="15.0">
-                                    <Label styleClass="info-header" text="Menu Legend" />
+                                    <Label styleClass="info-header" text="Menu icons and keyboard shortcuts" />
                                     <GridPane hgap="20.0" vgap="15.0">
                                         <columnConstraints>
                                             <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="60.0" />
@@ -89,7 +89,7 @@
                                     <Label styleClass="info-header" text="Controls &amp; Rules" />
                                     <Label styleClass="info-text" text="• Use Arrow Keys or WASD to move tiles." wrapText="true" />
                                     <Label styleClass="info-text" text="• Back/Exit automatically saves game state." wrapText="true" />
-                                    <Label styleClass="info-text" text="• You can Undo one move at a time." wrapText="true" />
+                                    <Label styleClass="info-text" text="• You can undo one move at a time." wrapText="true" />
                                     <Label styleClass="info-text" text="• Enter name for High Score when game ends." wrapText="true" />
                                 </VBox>
                             </children>

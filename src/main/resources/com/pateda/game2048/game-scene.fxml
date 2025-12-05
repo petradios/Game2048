@@ -62,25 +62,26 @@
 
         <VBox fx:id="winMessageOverlay" alignment="CENTER" prefHeight="450.0" prefWidth="450.0" style="-fx-background-color: rgba(238, 228, 218, 0.95); -fx-background-radius: 6px;" visible="false" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="175.0">
             <children>
-                <Label style="-fx-font-size: 60px; -fx-text-fill: #edc22e;" styleClass="game-title" text="2048!" />
-                <Label style="-fx-font-size: 20px; -fx-text-fill: #776e65;" text="You beat the game! Keep playing?">
+                <Label style="-fx-font-size: 60px; -fx-text-fill: #edc22e;" styleClass="game-title" text="2048!!" />
+                <Label style="-fx-font-size: 20px; -fx-text-fill: #776e65;" text="you beat the game. continue?">
                     <VBox.margin>
                         <Insets bottom="30.0" />
                     </VBox.margin>
                 </Label>
-                <Button mnemonicParsing="false" onAction="#onContinuePlaying" styleClass="menu-button" text="Continue Playing">
+                <Button mnemonicParsing="false" onAction="#onContinuePlaying" styleClass="menu-button" text="yes">
                     <VBox.margin>
                         <Insets bottom="10.0" />
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="menu-button-small" text="Go to Main Menu" />
+                <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="menu-button-small" text="main menu" />
             </children>
         </VBox>
 
         <VBox fx:id="highScoreOverlay" alignment="CENTER" prefHeight="450.0" prefWidth="450.0" spacing="15.0" style="-fx-background-color: rgba(237, 194, 46, 0.95); -fx-background-radius: 6px;" visible="false" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="175.0">
             <children>
-                <Label style="-fx-font-size: 40px; -fx-text-fill: #f9f6f2;" styleClass="game-title" text="High Score!" />
-                <Label style="-fx-font-size: 20px; -fx-text-fill: #f9f6f2;" text="Enter your name:" />
+                <Label style="-fx-font-size: 40px; -fx-text-fill: #f9f6f2;" styleClass="game-title" text="you lost..." />
+            <Label layoutX="10.0" layoutY="126.0" style="-fx-font-size: 40px; -fx-text-fill: #f9f6f2;" styleClass="game-title" text="but also high score :))" />
+                <Label style="-fx-font-size: 20px; -fx-text-fill: #f9f6f2;" text="enter your name:" />
 
                 <javafx.scene.control.TextField fx:id="nameInput" alignment="CENTER" maxWidth="300.0" promptText="Your Name" style="-fx-font-size: 18px;">
                     <VBox.margin>
@@ -88,22 +89,22 @@
                     </VBox.margin>
                 </javafx.scene.control.TextField>
 
-                <Button mnemonicParsing="false" onAction="#onSubmitHighScore" styleClass="menu-button" text="Submit Score" />
+                <Button mnemonicParsing="false" onAction="#onSubmitHighScore" styleClass="menu-button" text="okay" />
             </children>
         </VBox>
 
         <VBox fx:id="gameOverOverlay" alignment="CENTER" prefHeight="450.0" prefWidth="450.0" spacing="15.0" style="-fx-background-color: rgba(238, 228, 218, 0.73); -fx-background-radius: 6px;" visible="false" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="175.0">
             <children>
-                <Label style="-fx-font-size: 60px; -fx-text-fill: #776e65;" styleClass="game-title" text="Game Over!" />
+                <Label style="-fx-font-size: 60px; -fx-text-fill: #776e65;" styleClass="game-title" text="loserrrr" />
 
-                <Label style="-fx-font-size: 20px; -fx-text-fill: #776e65;" text="Bad luck! Try again?">
+                <Label style="-fx-font-size: 20px; -fx-text-fill: #776e65;" text="try again?">
                     <VBox.margin>
                         <Insets bottom="20.0" />
                     </VBox.margin>
                 </Label>
 
-                <Button fx:id="replayButton" mnemonicParsing="false" onAction="#onReplayButtonClick" styleClass="menu-button" text="Try Again" />
-                <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="menu-button-small" text="Go to Main Menu" />
+                <Button fx:id="replayButton" mnemonicParsing="false" onAction="#onReplayButtonClick" styleClass="menu-button" text="yes" />
+                <Button mnemonicParsing="false" onAction="#onBackButtonClick" styleClass="menu-button-small" text="main menu" />
             </children>
         </VBox>
 

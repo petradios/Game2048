@@ -49,6 +49,7 @@ public class SceneController implements Initializable {
             themeRegion.getStyleClass().remove("icon-moon");
 
             // Assuming standard isGrayscale check based on your Game2048 class
+            // Use Game2048.isGrayscale() if isDarkTheme() is not defined in Game2048
             if (Game2048.isDarkTheme()) {
                 themeRegion.getStyleClass().add("icon-moon");
             } else {
@@ -114,25 +115,87 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // 1. GAME SCENE LOGIC
         if (gameGrid != null) {
-            // --- Game Scene Initialization ---
             tileLabels = new Label[][]{
                     {tile00, tile10, tile20, tile30}, {tile01, tile11, tile21, tile31},
                     {tile02, tile12, tile22, tile32}, {tile03, tile13, tile23, tile33}
             };
             gameGrid.setFocusTraversable(true);
-            gameGrid.setOnKeyPressed(this::handleKeyPress);
+            gameGrid.setOnKeyPressed(this::handleGameKeyPress);
             updateUndoButtonState();
 
             if (nameInput != null) {
                 nameInput.setOnAction(this::onSubmitHighScore);
             }
         }
+        // 2. MAIN MENU LOGIC
         else if (playButton != null) {
-            // --- Main Menu Initialization ---
             boolean saveExists = GameController.saveFileExists(GameController.getSaveFile());
 
-            // Note: Logic for changing icons based on save state can go here if needed
+            // --- FIX START: Disable Focus Traversal ---
+            // This prevents buttons from "stealing" the Space/Enter keys.
+            // Now, only your handleMenuKeyPress method controls the input.
+            quitIcon.setFocusTraversable(false);
+            infoIcon.setFocusTraversable(false);
+            newGameIcon.setFocusTraversable(false);
+            themeToggleIcon.setFocusTraversable(false);
+            playButton.setFocusTraversable(false);
+            scoreIcon.setFocusTraversable(false);
+            // --- FIX END ---
+
+            // Attach Menu Keyboard Listener
+            Platform.runLater(() -> {
+                if (playButton.getScene() != null) {
+                    playButton.getScene().setOnKeyPressed(this::handleMenuKeyPress);
+
+                    // Optional: Request focus on the container so no button is highlighted
+                    playButton.getParent().requestFocus();
+                }
+            });
+        }
+        // 3. HIGH SCORES SCENE LOGIC
+        else if (highScoreList != null) {
+            Platform.runLater(() -> {
+                if (highScoreList.getScene() != null) {
+                    highScoreList.getScene().setOnKeyPressed(this::handleBackKeyOnly);
+                }
+            });
+        }
+    }
+
+    // --- KEYBOARD HANDLERS (NEW) ---
+
+    /**
+     * Handles keyboard input for the Main Menu.
+     */
+    private void handleMenuKeyPress(KeyEvent event) {
+        // If Confirmation Overlay is visible, only allow Escape (to cancel) or Enter (to confirm)
+        if (newGameConfirmationOverlay != null && newGameConfirmationOverlay.isVisible()) {
+            if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.N) {
+                onCancelNewGame(null);
+            } else if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.Y) { // Y for Yes
+                onConfirmNewGame(null);
+            }
+            return; // Block other inputs
+        }
+
+        switch (event.getCode()) {
+            case Q -> onQuitButtonClick(null);
+            case H, S -> onScoreClick(null);
+            case I -> onInfoClick(null);
+            case N -> onNewGameButtonClick(null);
+            case T -> onThemeToggle(null);
+            case ENTER, SPACE -> onPlayButtonClick(null);
+        }
+    }
+
+    /**
+     * Handles keyboard input for Info and High Score screens (Escape to go back).
+     */
+    private void handleBackKeyOnly(KeyEvent event) {
+        if (event.getCode() == KeyCode.ESCAPE) {
+            onBackToMenuClick(null);
         }
     }
 
@@ -144,7 +207,6 @@ public class SceneController implements Initializable {
 
     // --- Menu Handlers ---
 
-    // INTEGRATED: Updated Info Click Handler
     @FXML
     private void onInfoClick(ActionEvent event) {
         loadInfoScene();
@@ -164,7 +226,6 @@ public class SceneController implements Initializable {
 
     // --- SCENE LOADING LOGIC ---
 
-    // INTEGRATED: Load Info Scene Method
     private void loadInfoScene() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pateda/game2048/info.fxml"));
@@ -173,6 +234,10 @@ public class SceneController implements Initializable {
             controller.setStage(stage);
 
             Scene scene = new Scene(root, 800, 800);
+
+            // KEYBOARD FIX: Attach Back Listener to Info Scene
+            scene.setOnKeyPressed(controller::handleBackKeyOnly);
+
             Game2048.applyTheme(scene);
             stage.setScene(scene);
             stage.setTitle("2048 - Information");
@@ -194,6 +259,10 @@ public class SceneController implements Initializable {
             controller.populateHighScores();
 
             Scene scene = new Scene(root, 800, 800);
+
+            // KEYBOARD FIX: Attach Back Listener to High Score Scene
+            scene.setOnKeyPressed(controller::handleBackKeyOnly);
+
             Game2048.applyTheme(scene);
             stage.setScene(scene);
             stage.setTitle("2048 - High Scores");
@@ -249,7 +318,58 @@ public class SceneController implements Initializable {
             e.printStackTrace();
         }
     }
+    @FXML private VBox newGameConfirmationOverlay;
 
+    // --- Updated Navigation Handlers ---
+
+    @FXML
+    private void onNewGameButtonClick(ActionEvent event) {
+        boolean saveExists = GameController.saveFileExists(GameController.getSaveFile());
+
+        if (saveExists) {
+            // Check if the saved game is actually active or already game over
+            GameController savedGame = GameController.loadGame(GameController.getSaveFile());
+            if (savedGame != null && !savedGame.isGameOver()) {
+                // Game is active -> Show Confirmation Prompt
+                if (newGameConfirmationOverlay != null) {
+                    newGameConfirmationOverlay.setVisible(true);
+                }
+                return; // Stop here, wait for user response
+            }
+        }
+
+        // If no save, or save is Game Over -> Start Immediately
+        launchNewGame();
+    }
+
+    @FXML
+    private void onConfirmNewGame(ActionEvent event) {
+        if (newGameConfirmationOverlay != null) {
+            newGameConfirmationOverlay.setVisible(false);
+        }
+        launchNewGame();
+    }
+
+    @FXML
+    private void onCancelNewGame(ActionEvent event) {
+        if (newGameConfirmationOverlay != null) {
+            newGameConfirmationOverlay.setVisible(false);
+        }
+    }
+
+    // Helper method to actually start the game logic
+    private void launchNewGame() {
+        GameController newGame = new GameController();
+
+        // Preserve High Scores
+        if (GameController.saveFileExists(GameController.getSaveFile())) {
+            GameController oldData = GameController.loadGame(GameController.getSaveFile());
+            if (oldData != null) {
+                newGame.setHighScores(oldData.getHighScores());
+            }
+        }
+        loadGameScene(newGame);
+    }
     // --- HIGH SCORE LOGIC ---
 
     public void populateHighScores() {
@@ -327,19 +447,6 @@ public class SceneController implements Initializable {
     }
 
     @FXML
-    private void onNewGameButtonClick(ActionEvent event) {
-        GameController newGame = new GameController();
-
-        if (GameController.saveFileExists(GameController.getSaveFile())) {
-            GameController oldData = GameController.loadGame(GameController.getSaveFile());
-            if (oldData != null) {
-                newGame.setHighScores(oldData.getHighScores());
-            }
-        }
-        loadGameScene(newGame);
-    }
-
-    @FXML
     private void onPlayButtonClick(ActionEvent event) {
         boolean saveExists = GameController.saveFileExists(GameController.getSaveFile());
 
@@ -410,8 +517,9 @@ public class SceneController implements Initializable {
         }
     }
 
+    // RENAMED: This handles key press specifically for the GAME scene
     @FXML
-    private void handleKeyPress(KeyEvent event) {
+    private void handleGameKeyPress(KeyEvent event) {
         if (event.getCode() == KeyCode.ESCAPE) {
             onBackButtonClick(null);
             event.consume();
