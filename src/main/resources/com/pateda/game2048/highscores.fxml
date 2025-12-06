@@ -9,8 +9,10 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
+<!-- High Scores Display Screen -->
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
     <children>
+        <!-- Main Content Area -->
         <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label styleClass="game-title" text="hii scores!!">
@@ -19,8 +21,10 @@
                     </VBox.margin>
                 </Label>
 
+                <!-- High Score Table Container -->
                 <VBox alignment="TOP_CENTER" maxWidth="500.0" prefHeight="500.0" styleClass="highscore-container">
                     <children>
+                        <!-- Header Row -->
                         <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="highscore-header">
                             <children>
                                 <Label prefWidth="60.0" styleClass="highscore-label-header" text="rank" />
@@ -33,6 +37,7 @@
                             </padding>
                         </HBox>
 
+                        <!-- Scrollable List of Scores -->
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="highscore-scroll" vbarPolicy="AS_NEEDED">
                             <content>
                                 <VBox fx:id="highScoreList" spacing="10.0" styleClass="highscore-list-vbox">
@@ -47,6 +52,7 @@
             </children>
         </VBox>
 
+        <!-- Back Button (Placed last for correct Z-order) -->
         <Button mnemonicParsing="false" onAction="#onBackToMenuClick" styleClass="menu-button-icon" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0">
             <graphic>
                 <Region styleClass="svg-icon, icon-back" />
