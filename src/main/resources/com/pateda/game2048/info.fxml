@@ -11,97 +11,104 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<!-- Information / Help Screen -->
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
     <children>
         <!-- Main Content Area -->
-        <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox alignment="TOP_CENTER" spacing="10.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label styleClass="game-title" text="Info">
                     <VBox.margin>
-                        <Insets bottom="10.0" top="40.0" />
+                        <Insets bottom="5.0" top="30.0" />
                     </VBox.margin>
                 </Label>
 
-                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxWidth="600.0" styleClass="highscore-scroll" vbarPolicy="AS_NEEDED">
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxWidth="650.0" styleClass="highscore-scroll" vbarPolicy="AS_NEEDED">
                     <content>
-                        <VBox spacing="25.0" styleClass="highscore-list-vbox">
+                        <VBox spacing="20.0" styleClass="highscore-list-vbox">
                             <padding>
-                                <Insets bottom="50.0" left="20.0" right="20.0" top="10.0" />
+                                <Insets bottom="30.0" left="15.0" right="15.0" top="5.0" />
                             </padding>
                             <children>
                                 <!-- Game Goal Section -->
-                                <VBox spacing="10.0">
+                                <VBox spacing="5.0">
                                     <Label styleClass="info-header" text="Goal" textAlignment="CENTER" />
                                     <Label styleClass="info-text" text="Connect similar squares to merge them. Reach the 2048 tile to win!" wrapText="true" />
                                     <Label styleClass="info-text" text="(You can continue playing for a high score after winning)" wrapText="true" />
                                 </VBox>
 
                                 <!-- Menu Legend Section -->
-                                <VBox spacing="15.0">
-                                    <Label styleClass="info-header" text="Menu icons and keyboard shortcuts" />
-                                    <GridPane hgap="20.0" vgap="15.0">
+                                <VBox spacing="10.0">
+                                    <Label styleClass="info-header" text="Menu &amp; Shortcuts" />
+                                    <GridPane hgap="15.0" vgap="8.0">
                                         <columnConstraints>
-                                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="60.0" />
-                                            <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" />
+                                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="50.0" />
+                                            <ColumnConstraints hgrow="ALWAYS" minWidth="250.0" />
+                                            <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="80.0" />
                                         </columnConstraints>
                                         <rowConstraints>
-                                            <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
-                                            <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
-                                            <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
-                                            <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
-                                            <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
-                                            <RowConstraints minHeight="50.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="40.0" vgrow="SOMETIMES" />
                                         </rowConstraints>
                                         <children>
                                             <!-- Q: Quit -->
-                                            <Button id="quitIcon" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mouseTransparent="true" prefHeight="25.0" prefWidth="25.0" styleClass="icon-button-grid">
-                                                <graphic><Region maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="svg-icon, icon-quit" /></graphic>
+                                            <Button id="quitIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button-grid">
+                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-quit" /></graphic>
                                             </Button>
                                             <Label styleClass="info-text" text="Quit Application" GridPane.columnIndex="1" />
+                                            <Label styleClass="info-text" text="[ Q ]" GridPane.columnIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- H: Scores -->
-                                            <Button id="scoreIcon" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="1">
-                                                <graphic><Region maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="svg-icon, icon-score" /></graphic>
+                                            <Button id="scoreIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="1">
+                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-score" /></graphic>
                                             </Button>
                                             <Label styleClass="info-text" text="High Scores" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            <Label styleClass="info-text" text="[ H ]" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- T: Theme -->
-                                            <Button id="themeToggleIcon" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="2">
-                                                <graphic><Region maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="svg-icon, icon-sun" /></graphic>
+                                            <Button id="themeToggleIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="2">
+                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-sun" /></graphic>
                                             </Button>
                                             <Label styleClass="info-text" text="Toggle Theme" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            <Label styleClass="info-text" text="[ T ]" GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- I: Info -->
-                                            <Button id="infoIcon" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="3">
-                                                <graphic><Region maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="svg-icon, icon-info" /></graphic>
+                                            <Button id="infoIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="3">
+                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-info" /></graphic>
                                             </Button>
                                             <Label styleClass="info-text" text="Information" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            <Label styleClass="info-text" text="[ I ]" GridPane.columnIndex="2" GridPane.rowIndex="3" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- N: New Game -->
-                                            <Button id="newGameIcon" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="4">
-                                                <graphic><Region maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" prefHeight="25.0" prefWidth="25.0" styleClass="svg-icon, icon-restart" /></graphic>
+                                            <Button id="newGameIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="4">
+                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-restart" /></graphic>
                                             </Button>
                                             <Label styleClass="info-text" text="New Game (Reset)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                            <Label styleClass="info-text" text="[ N ]" GridPane.columnIndex="2" GridPane.rowIndex="4" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- C: Continue -->
-                                            <Button id="playButton" maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="5">
-                                                <graphic><Region maxHeight="25.0" maxWidth="25.0" minHeight="25.0" minWidth="25.0" styleClass="svg-icon, icon-play" /></graphic>
+                                            <Button id="playButton" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="5">
+                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" styleClass="svg-icon, icon-play" /></graphic>
                                             </Button>
                                             <Label styleClass="info-text" text="Continue Game" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            <Label styleClass="info-text" text="[ Enter ]" GridPane.columnIndex="2" GridPane.rowIndex="5" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
                                         </children>
                                     </GridPane>
                                 </VBox>
 
-                                <Region prefHeight="10.0" />
+                                <Region prefHeight="5.0" />
 
                                 <!-- Controls Section -->
-                                <VBox spacing="10.0">
+                                <VBox spacing="8.0">
                                     <Label styleClass="info-header" text="Controls &amp; Rules" />
                                     <Label styleClass="info-text" text="• Use Arrow Keys or WASD to move tiles." wrapText="true" />
                                     <Label styleClass="info-text" text="• Back/Exit automatically saves game state." wrapText="true" />
                                     <Label styleClass="info-text" text="• You can undo one move at a time." wrapText="true" />
                                     <Label styleClass="info-text" text="• Enter name for High Score when game ends." wrapText="true" />
+                                    <Label styleClass="info-text" text="• ESCAPE goes back from Info/Score screens." wrapText="true" />
                                 </VBox>
                             </children>
                         </VBox>
