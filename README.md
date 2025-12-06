@@ -58,8 +58,7 @@ A modern, feature-rich implementation of the classic **2048** puzzle game, built
 1. Clone the repository.
 2. Open a terminal in the project root.
 3. Run using the Maven JavaFX plugin: \
-mvn javafx:run \
- \
+```mvn javafx:run```
 
 
 
@@ -70,13 +69,12 @@ To create a single, runnable JAR file (including all dependencies):
 
 
 1. Run the Maven package command: \
-mvn clean package \
- \
+```mvn clean package```
 
 2. Navigate to the target/ directory.
 3. Run the shaded JAR: \
-java -jar game2048-1.0-SNAPSHOT.jar \
- \
+```java -jar game2048-1.0-SNAPSHOT.jar```
+ 
 
 
 
@@ -84,12 +82,12 @@ java -jar game2048-1.0-SNAPSHOT.jar \
 
 
 
-* src/main/java/com/pateda/game2048: Java source code.
-    * Game2048.java: Main application class.
-    * GameController.java: Core game logic and state management.
-    * SceneController.java: UI interaction and scene switching.
-    * Launcher.java: Wrapper for standalone JAR execution.
-* src/main/resources/com/pateda/game2048: FXML layouts, CSS styles, and assets.
+* ```src/main/java/com/pateda/game2048```: Java source code.
+    * ```Game2048.java```: Main application class.
+    * ```GameController.java```: Core game logic and state management.
+    * ```SceneController.java```: UI interaction and scene switching.
+    * ```Launcher.java```: Wrapper for standalone JAR execution.
+* ```src/main/resources/com/pateda/game2048```: FXML layouts, CSS styles, and assets.
 
 
 ## Acknowledgments
