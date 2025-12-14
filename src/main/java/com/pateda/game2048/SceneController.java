@@ -139,6 +139,13 @@ public class SceneController implements Initializable {
             return;
         }
 
+        // event.isShortcutDown() checks for Ctrl on Windows/Linux and Command on Mac
+        if (event.getCode() == KeyCode.Z && event.isShortcutDown()) {
+            onUndoButtonClick(null);
+            event.consume();
+            return;
+        }
+
         Direction direction = null;
 
         // Game Over / High Score Check logic

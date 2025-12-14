@@ -106,7 +106,7 @@
                                     <Label styleClass="info-header" text="controls &amp; rules" />
                                     <Label styleClass="info-text" text="• use arrow keys or WASD to move tiles." wrapText="true" />
                                     <Label styleClass="info-text" text="• back/exit automatically saves game state." wrapText="true" />
-                                    <Label styleClass="info-text" text="• you can undo one move at a time." wrapText="true" />
+                                    <Label styleClass="info-text" text="• you can undo [ctrl+z] one move at a time." wrapText="true" />
                                     <Label styleClass="info-text" text="• enter name for high score when game ends." wrapText="true" />
                                     <Label styleClass="info-text" text="• [ESCAPE] goes back from info/score screens." wrapText="true" />
                                 </VBox>
