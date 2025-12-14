@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Represents a single high score entry containing player name, score, and date.
- * Implements Serializable for JSON storage and Comparable for sorting.
- */
+ //Represents a single high score entry containing player name, score, and date.
+
 public class HighScore implements Serializable, Comparable<HighScore> {
     private String name;
     private long score;
@@ -20,10 +18,10 @@ public class HighScore implements Serializable, Comparable<HighScore> {
     public HighScore(String name, long score) {
         this.name = (name == null || name.trim().isEmpty()) ? "Anonymous" : name;
         this.score = score;
-        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
-    // --- Getters and Setters ---
+    // Getters and Setters
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -34,7 +32,7 @@ public class HighScore implements Serializable, Comparable<HighScore> {
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
 
-    // Sorts scores in descending order (highest first)
+    // Sorts scores in descending order
     @Override
     public int compareTo(HighScore o) {
         return Long.compare(o.score, this.score);

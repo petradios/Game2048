@@ -16,7 +16,7 @@
         <!-- Main Content Area -->
         <VBox alignment="TOP_CENTER" spacing="10.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label styleClass="game-title" text="Info">
+                <Label styleClass="game-title" text="info">
                     <VBox.margin>
                         <Insets bottom="5.0" top="30.0" />
                     </VBox.margin>
@@ -31,14 +31,14 @@
                             <children>
                                 <!-- Game Goal Section -->
                                 <VBox spacing="5.0">
-                                    <Label styleClass="info-header" text="Goal" textAlignment="CENTER" />
-                                    <Label styleClass="info-text" text="Connect similar squares to merge them. Reach the 2048 tile to win!" wrapText="true" />
-                                    <Label styleClass="info-text" text="(You can continue playing for a high score after winning)" wrapText="true" />
+                                    <Label styleClass="info-header" text="goal" textAlignment="CENTER" />
+                                    <Label styleClass="info-text" text="connect similar squares to merge them. reach the 2048 tile to win!" wrapText="true" />
+                                    <Label styleClass="info-text" text="(you can continue playing for a high score after winning)" wrapText="true" />
                                 </VBox>
 
                                 <!-- Menu Legend Section -->
                                 <VBox spacing="10.0">
-                                    <Label styleClass="info-header" text="Menu &amp; Shortcuts" />
+                                    <Label styleClass="info-header" text="menu &amp; shortcuts" />
                                     <GridPane hgap="15.0" vgap="8.0">
                                         <columnConstraints>
                                             <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="50.0" />
@@ -58,43 +58,43 @@
                                             <Button id="quitIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" prefHeight="30.0" prefWidth="30.0" styleClass="icon-button-grid">
                                                 <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-quit" /></graphic>
                                             </Button>
-                                            <Label styleClass="info-text" text="Quit Application" GridPane.columnIndex="1" />
+                                            <Label styleClass="info-text" text="quit application" GridPane.columnIndex="1" />
                                             <Label styleClass="info-text" text="[ Q ]" GridPane.columnIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- H: Scores -->
                                             <Button id="scoreIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="1">
                                                 <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-score" /></graphic>
                                             </Button>
-                                            <Label styleClass="info-text" text="High Scores" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            <Label styleClass="info-text" text="high scores" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                             <Label styleClass="info-text" text="[ H ]" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- T: Theme -->
                                             <Button id="themeToggleIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="2">
-                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-sun" /></graphic>
+                                                <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-moon" /></graphic>
                                             </Button>
-                                            <Label styleClass="info-text" text="Toggle Theme" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            <Label styleClass="info-text" text="toggle theme" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                             <Label styleClass="info-text" text="[ T ]" GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- I: Info -->
                                             <Button id="infoIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="3">
                                                 <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-info" /></graphic>
                                             </Button>
-                                            <Label styleClass="info-text" text="Information" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            <Label styleClass="info-text" text="information" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                             <Label styleClass="info-text" text="[ I ]" GridPane.columnIndex="2" GridPane.rowIndex="3" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- N: New Game -->
                                             <Button id="newGameIcon" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="4">
                                                 <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" prefHeight="18.0" prefWidth="18.0" styleClass="svg-icon, icon-restart" /></graphic>
                                             </Button>
-                                            <Label styleClass="info-text" text="New Game (Reset)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                            <Label styleClass="info-text" text="new game (reset)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                             <Label styleClass="info-text" text="[ N ]" GridPane.columnIndex="2" GridPane.rowIndex="4" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
 
                                             <!-- C: Continue -->
                                             <Button id="playButton" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" mouseTransparent="true" styleClass="icon-button-grid" GridPane.rowIndex="5">
                                                 <graphic><Region maxHeight="18.0" maxWidth="18.0" minHeight="18.0" minWidth="18.0" styleClass="svg-icon, icon-play" /></graphic>
                                             </Button>
-                                            <Label styleClass="info-text" text="Continue Game" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                            <Label styleClass="info-text" text="[ Enter ]" GridPane.columnIndex="2" GridPane.rowIndex="5" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
+                                            <Label styleClass="info-text" text="continue game" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            <Label styleClass="info-text" text="[ enter ]" GridPane.columnIndex="2" GridPane.rowIndex="5" style="-fx-font-weight: bold; -fx-opacity: 0.8;" />
                                         </children>
                                     </GridPane>
                                 </VBox>
@@ -103,12 +103,12 @@
 
                                 <!-- Controls Section -->
                                 <VBox spacing="8.0">
-                                    <Label styleClass="info-header" text="Controls &amp; Rules" />
-                                    <Label styleClass="info-text" text="• Use Arrow Keys or WASD to move tiles." wrapText="true" />
-                                    <Label styleClass="info-text" text="• Back/Exit automatically saves game state." wrapText="true" />
-                                    <Label styleClass="info-text" text="• You can undo one move at a time." wrapText="true" />
-                                    <Label styleClass="info-text" text="• Enter name for High Score when game ends." wrapText="true" />
-                                    <Label styleClass="info-text" text="• ESCAPE goes back from Info/Score screens." wrapText="true" />
+                                    <Label styleClass="info-header" text="controls &amp; rules" />
+                                    <Label styleClass="info-text" text="• use arrow keys or WASD to move tiles." wrapText="true" />
+                                    <Label styleClass="info-text" text="• back/exit automatically saves game state." wrapText="true" />
+                                    <Label styleClass="info-text" text="• you can undo one move at a time." wrapText="true" />
+                                    <Label styleClass="info-text" text="• enter name for high score when game ends." wrapText="true" />
+                                    <Label styleClass="info-text" text="• [ESCAPE] goes back from info/score screens." wrapText="true" />
                                 </VBox>
                             </children>
                         </VBox>

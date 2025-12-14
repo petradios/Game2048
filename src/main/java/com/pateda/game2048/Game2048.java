@@ -9,10 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Main JavaFX Application class.
- * Handles stage setup, scene loading, and global theme management.
- */
 public class Game2048 extends Application {
 
     private static final String DEFAULT_CSS = "/com/pateda/game2048/styles.css";

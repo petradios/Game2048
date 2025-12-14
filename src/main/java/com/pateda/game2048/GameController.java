@@ -12,9 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-/**
- * Manages game logic, board state, undo history, and JSON persistence.
- */
 public class GameController {
 
     private static final int BOARD_SIZE = 4;
@@ -27,7 +24,7 @@ public class GameController {
         SAVE_FILE = System.getProperty("user.home") + File.separator + "2048_save.json";
     }
 
-    // --- Game State Fields ---
+    //Game State Fields
     private int[][] gameBoard;
     private long score;
     private boolean isGameOver;
@@ -38,7 +35,7 @@ public class GameController {
     @JsonIgnore
     private final Random random;
 
-    // --- History for Undo ---
+    //History for Undo
     private List<int[][]> boardHistory;
     private List<Long> scoreHistory;
 
@@ -59,7 +56,7 @@ public class GameController {
         initializeBoard();
     }
 
-    // --- Serialization Accessors (Used by Jackson) ---
+    //Serialization Accessors
 
     @JsonProperty("gameBoard")
     public int[][] getBoard() { return gameBoard; }
@@ -90,8 +87,6 @@ public class GameController {
         return highScores;
     }
     public void setHighScores(List<HighScore> highScores) { this.highScores = highScores; }
-
-    // --- Core Logic ---
 
     // Clears board and spawns initial tiles
     private void initializeBoard() {
@@ -182,7 +177,7 @@ public class GameController {
         return moved;
     }
 
-    // Core logic: slides tiles to left and merges duplicates
+    //Method that slides tiles to left and merges duplicates
     private boolean slideAndMergeLeft() {
         boolean changed = false;
 
@@ -273,7 +268,7 @@ public class GameController {
         isGameOver = true;
     }
 
-    // --- Undo Logic ---
+    //Undo Logic
 
     private void saveHistoryState() {
         if (boardHistory.size() >= HISTORY_LIMIT) {
@@ -306,7 +301,7 @@ public class GameController {
         return !boardHistory.isEmpty();
     }
 
-    // --- Persistence ---
+    //Persistence
 
     public void saveGame(String filePath) {
         ObjectMapper mapper = new ObjectMapper();
@@ -342,7 +337,7 @@ public class GameController {
         return SAVE_FILE;
     }
 
-    // --- Utility Methods ---
+    //Utility Methods
 
     private int[][] deepCopy(int[][] source) {
         int[][] destination = new int[BOARD_SIZE][BOARD_SIZE];

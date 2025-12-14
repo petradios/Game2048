@@ -25,16 +25,12 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * UI Controller for all scenes (Menu, Game, High Score, Info).
- * Handles user input, animations, and scene switching.
- */
 public class SceneController implements Initializable {
 
-    // --- Global Reference ---
+    //Global Reference
     private static GameController activeGameInstance = null;
 
-    // --- Menu UI Elements ---
+    //Menu UI Elements
     @FXML private Button quitIcon;
     @FXML private Button infoIcon;
     @FXML private Button newGameIcon;
@@ -45,7 +41,7 @@ public class SceneController implements Initializable {
     @FXML private javafx.scene.layout.Region themeRegion;
     @FXML private VBox newGameConfirmationOverlay;
 
-    // --- Game UI Elements ---
+    //Game UI Elements
     @FXML private GridPane gameGrid;
     @FXML private Label scoreLabel;
     @FXML private Button undoButton;
@@ -54,7 +50,7 @@ public class SceneController implements Initializable {
     @FXML private Label tile02, tile12, tile22, tile32;
     @FXML private Label tile03, tile13, tile23, tile33;
 
-    // --- Overlays ---
+    //Overlays
     @FXML private VBox winMessageOverlay;
     @FXML private VBox highScoreOverlay;
     @FXML private VBox gameOverOverlay;
@@ -62,22 +58,21 @@ public class SceneController implements Initializable {
     @FXML private Button replayButton;
     @FXML private TextField nameInput;
 
-    // --- Internal State ---
+    //Internal State
     private GameController gameLogic;
     private Label[][] tileLabels;
     private Stage stage;
     private int[][] oldBoardState; // For animation comparison
     private static final int BOARD_SIZE = 4;
 
-    // --- Setters/Getters ---
+    //Setters/Getters
     public void setStage(Stage stage) { this.stage = stage; }
     public static GameController getActiveGameInstance() { return activeGameInstance; }
-    public GameController getGameLogic() { return gameLogic; }
 
-    /**
-     * Initializes the controller class.
-     * Detects which scene is loaded based on injected elements and configures it.
-     */
+
+     //Initializes the controller class.
+     //Detects which scene is loaded based on injected elements and configures it.
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // 1. Game Scene Initialization
@@ -127,7 +122,7 @@ public class SceneController implements Initializable {
         if (scoreIcon != null) scoreIcon.setFocusTraversable(false);
     }
 
-    // --- Keyboard Handlers ---
+    //Keyboard Handlers
 
     // Handles Game Scene inputs (Arrows/WASD for movement)
     @FXML
@@ -203,7 +198,7 @@ public class SceneController implements Initializable {
         }
     }
 
-    // --- UI Update Logic ---
+    //UI Update Logic
 
     // Syncs UI Grid with Internal Board State
     public void updateBoardUI() {
@@ -278,9 +273,9 @@ public class SceneController implements Initializable {
             themeRegion.getStyleClass().remove("icon-sun");
             themeRegion.getStyleClass().remove("icon-moon");
             if (Game2048.isDarkTheme()) {
-                themeRegion.getStyleClass().add("icon-moon");
-            } else {
                 themeRegion.getStyleClass().add("icon-sun");
+            } else {
+                themeRegion.getStyleClass().add("icon-moon");
             }
         }
     }
@@ -305,7 +300,7 @@ public class SceneController implements Initializable {
         }
     }
 
-    // --- Navigation & Action Handlers ---
+    //Navigation & Action Handlers
 
     @FXML private void onInfoClick(ActionEvent event) { loadInfoScene(); }
     @FXML private void onScoreClick(ActionEvent event) { loadHighScoresScene(); }
@@ -402,7 +397,7 @@ public class SceneController implements Initializable {
         }
     }
 
-    // --- Scene Loading Helpers ---
+    //Scene Loading Helpers
 
     private void loadInfoScene() {
         loadScene("/com/pateda/game2048/info.fxml", "2048 - Information", true);
@@ -483,7 +478,7 @@ public class SceneController implements Initializable {
         return lbl;
     }
 
-    // --- Helper Methods ---
+    //Helper Methods
 
     private int[][] deepCopy(int[][] source) {
         int[][] destination = new int[BOARD_SIZE][BOARD_SIZE];

@@ -10,12 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 
 <!-- High Scores Display Screen -->
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" styleClass="main-menu-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pateda.game2048.SceneController">
     <children>
         <!-- Main Content Area -->
         <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label styleClass="game-title" text="hii scores!!">
+                <Label styleClass="game-title" text="hi-scores!!">
                     <VBox.margin>
                         <Insets bottom="10.0" top="40.0" />
                     </VBox.margin>
@@ -27,7 +28,7 @@
                         <!-- Header Row -->
                         <HBox alignment="CENTER_LEFT" spacing="20.0" styleClass="highscore-header">
                             <children>
-                                <Label prefWidth="60.0" styleClass="highscore-label-header" text="rank" />
+                                <Label prefHeight="17.0" prefWidth="82.0" styleClass="highscore-label-header" text="rank" />
                                 <Label prefWidth="150.0" styleClass="highscore-label-header" text="name" />
                                 <Label prefWidth="130.0" styleClass="highscore-label-header" text="date" />
                                 <Label alignment="CENTER_RIGHT" prefWidth="120.0" styleClass="highscore-label-header" text="score" />

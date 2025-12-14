@@ -1,8 +1,4 @@
-/* * 2048 Game Styling - Standard Light Theme
- * Provides background and text colors for each tile value.
- */
-
-/* --- Color Palette Definitions --- */
+/* Color Palette Definitions */
 * {
     /* Base Colors */
     -fx-base-background: #faf8ef;
@@ -45,7 +41,7 @@
     -fx-btn-new-hover: #F9C09C;
 }
 
-/* --- Base Styles --- */
+/* Base Styles */
 .root {
     -fx-background-color: -fx-base-background;
     -fx-font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
@@ -61,7 +57,7 @@
     -fx-text-fill: -fx-text-primary;
 }
 
-/* --- Menu Grid Styles --- */
+/* Menu Grid Styles */
 .menu-grid-container {
     -fx-background-color: -fx-board-background;
     -fx-padding: 10px;
@@ -111,7 +107,7 @@
     -fx-padding: 0;
 }
 
-/* --- Standard Button Styling --- */
+/* Standard Button Styling */
 .menu-button, .menu-button-small {
     -fx-background-color: -fx-btn-primary;
     -fx-text-fill: -fx-text-secondary;
@@ -168,7 +164,7 @@
 }
 .menu-button-icon:hover { -fx-background-color: -fx-btn-primary-hover; }
 
-/* --- Specific Menu Button Colors --- */
+/* Specific Menu Button Colors */
 #quitIcon { -fx-background-color: -fx-btn-quit; }
 #quitIcon:hover { -fx-background-color: -fx-btn-quit-hover; }
 #quitIcon .svg-icon { -fx-background-color: -fx-text-secondary; }
@@ -193,7 +189,7 @@
 #newGameIcon:hover { -fx-background-color: -fx-btn-new-hover; }
 #newGameIcon .svg-icon { -fx-background-color: -fx-text-secondary; }
 
-/* --- Text Field Styles --- */
+/* Text Field Styles */
 .text-field {
     -fx-background-color: -fx-text-secondary;
     -fx-text-fill: -fx-text-primary;
@@ -213,7 +209,7 @@
     -fx-effect: dropshadow(three-pass-box, rgba(143, 122, 102, 0.4), 5, 0, 0, 0);
 }
 
-/* --- Game Board Styles --- */
+/* Game Board Styles */
 .game-grid {
     -fx-background-color: -fx-board-background;
     -fx-padding: 10px;
@@ -245,7 +241,7 @@
 .tile-2048  { -fx-background-color: -fx-tile-2048; -fx-text-fill: -fx-text-secondary; -fx-font-size: 26pt; }
 .tile-max   { -fx-background-color: -fx-tile-max; -fx-text-fill: -fx-text-secondary; -fx-font-size: 22pt; }
 
-/* --- HUD Styles --- */
+/* HUD Styles */
 .score-label-game {
     -fx-font-size: 24pt;
     -fx-font-weight: bold;
@@ -262,7 +258,7 @@
     -fx-background-radius: 6px;
 }
 
-/* --- High Score Styles --- */
+/* High Score Styles */
 .highscore-container {
     -fx-background-color: -fx-board-background;
     -fx-background-radius: 6px;
@@ -307,7 +303,7 @@
     -fx-font-size: 20px;
 }
 
-/* --- Info Page Styles --- */
+/* Info Page Styles */
 .info-header {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
@@ -321,7 +317,7 @@
     -fx-font-weight: normal;
 }
 
-/* --- SVG Icons --- */
+/* SVG Icons */
 .svg-icon {
     -fx-background-color: -fx-text-primary;
     -fx-min-width: 40px;
@@ -353,8 +349,9 @@
 .icon-sun { -fx-shape: "M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.79 1.41-1.41-1.79-1.79-1.41 1.41zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"; }
 .icon-back { -fx-shape: "M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"; -fx-scale-x: 0.7; -fx-scale-y: 1; }
 .icon-info { -fx-shape: "M256 512a256 256 0 1 0 0-512 256 256 0 1 0 0 512zM224 160a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm-8 64l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24z"; }
+.icon-moon { -fx-shape: "M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"; }
 
-/* --- Custom Scrollbar --- */
+/* Custom Scrollbar */
 .highscore-scroll .viewport { -fx-background-color: transparent; }
 .highscore-scroll .scroll-bar:vertical { -fx-background-color: transparent; -fx-pref-width: 12px; }
 .highscore-scroll .scroll-bar:vertical .track { -fx-background-color: -fx-tile-empty; -fx-background-radius: 6px; }

@@ -69,7 +69,7 @@
 
                         <!-- Row 3: Theme Toggle -->
                         <Button fx:id="themeToggleIcon" mnemonicParsing="false" onAction="#onThemeToggle" prefHeight="100.0" prefWidth="100.0" styleClass="icon-button-grid" GridPane.rowIndex="3">
-                            <graphic><javafx.scene.layout.Region fx:id="themeRegion" styleClass="svg-icon, icon-sun" /></graphic>
+                            <graphic><javafx.scene.layout.Region fx:id="themeRegion" styleClass="svg-icon, icon-moon" /></graphic>
                         </Button>
 
                         <!-- Decorative Tiles -->
@@ -91,13 +91,13 @@
         <!-- New Game Confirmation Overlay -->
         <VBox fx:id="newGameConfirmationOverlay" alignment="CENTER" maxHeight="400.0" maxWidth="400.0" spacing="20.0" style="-fx-background-color: rgba(30, 30, 30, 0.95); -fx-background-radius: 10;" visible="false">
             <children>
-                <Label styleClass="info-header" text="Start New Game?" />
-                <Label styleClass="info-text" text="Current progress will be lost." />
+                <Label styleClass="info-header" text="start new game?" />
+                <Label styleClass="info-text" text="current progress will be lost." />
 
                 <HBox alignment="CENTER" spacing="20.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#onConfirmNewGame" styleClass="menu-button" text="Yes" />
-                        <Button mnemonicParsing="false" onAction="#onCancelNewGame" styleClass="menu-button" text="No" />
+                        <Button mnemonicParsing="false" onAction="#onConfirmNewGame" styleClass="menu-button" text="yes" />
+                        <Button mnemonicParsing="false" onAction="#onCancelNewGame" styleClass="menu-button" text="no" />
                     </children>
                     <VBox.margin>
                         <Insets top="10.0" />
